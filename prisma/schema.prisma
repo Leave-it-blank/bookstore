@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  name     String?
+  password String
+  city     String
+  role     Role     @default(USER)
+  orders   Order[]
+  profile  Profile?
+}
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  userId Int    @unique
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Chapter {
+  id           Int      @id @unique @default(autoincrement())
+  number       Float    @unique
+  title        String
+  category     CATEGORY @default(CHAPTER)
+  price        Float
+  imageUrl     String
+  heading      String
+  introduction String
+  goalsTitle   String
+  goals        String
+  productId    Int
+  Product      Product  @relation(fields: [productId], references: [id])
+
+  @@index([productId], map: "Chapter_productId_fkey")
+}
+
+model Author {
+  id         Int      @id @unique @default(autoincrement())
+  name       String
+  jobTitle   String
+  degree     String
+  college    String
+  city       String
+  about      String
+  imageUrl   String
+  linkdInUrl String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Order {
+  id          Int         @id @unique @default(autoincrement())
+  orderNumber String      @unique
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  status      OrderStatus
+  total       Float
+  customerId  Int
+  customer    User        @relation(fields: [customerId], references: [id])
+  items       OrderItem[]
+
+  @@index([customerId], map: "Order_customerId_fkey")
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  quantity  Int
+  price     Float
+  productId Int
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  Product   Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId], map: "OrderItem_orderId_fkey")
+  @@index([productId], map: "OrderItem_productId_fkey")
+}
+
+model Product {
+  id            Int              @id @default(autoincrement())
+  titleSlug     String           @unique
+  title         String
+  category      Product_category @default(BOOK)
+  thumbUrl      String
+  rating        Float
+  description   String?
+  priceDigital  Float
+  priceHardCopy Float
+  authorId      Int
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime
+  Chapter       Chapter[]
+  OrderItem     OrderItem[]
+
+  @@index([authorId], map: "Product_authorId_fkey")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum CATEGORY {
+  BOOK
+  CHAPTER
+}
+
+enum OrderStatus {
+  CREATED
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}
+
+enum Product_category {
+  BOOK
+  CHAPTER
+}
