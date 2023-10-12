@@ -19,7 +19,7 @@ const Register: React.FC = () => {
     }, [UserContext]);
 
     const userRegisterRequest = async (userData: { name: string, email: string, password: string, city: string }) => {
-        await fetch('http://localhost:3000/api/auth/register', {
+        await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}}/api/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),

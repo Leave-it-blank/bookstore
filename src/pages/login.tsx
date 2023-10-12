@@ -14,7 +14,7 @@ const Login: React.FC = () => {
         e.preventDefault();
         console.log("login")
         // Implement your login logic here
-        await fetch('http://localhost:3000/api/auth/login', {
+        await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
