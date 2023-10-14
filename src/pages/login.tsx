@@ -3,18 +3,20 @@ import { useState, useContext, useEffect, Key } from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useUser } from '../store/user';
+import { useRouter, Router } from 'next/router';
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
 
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState<any>([]);
     const UserContext = useUser();
+    const Router = useRouter();
 
     const handleLogin = async (e: any) => {
         e.preventDefault();
         console.log("login")
         // Implement your login logic here
-        await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}}/api/auth/login`, {
+        await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
@@ -28,6 +30,7 @@ const Login: React.FC = () => {
                 UserContext.getuser();
                 //  getuser();
                 // window.location.href = '/';
+                Router.push('/');
             } else {
                 if (data.error) {
                     setErrors([data.error]);

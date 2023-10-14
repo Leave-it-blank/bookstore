@@ -32,8 +32,8 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     const verify = await comparePassword(password, user.password );
 
     if(verify){
-      const accessToken = jwt.sign({ email: user?.email , role: user?.role }, accessTokenSecret, { expiresIn: '20m' });
-      const refreshToken = jwt.sign({ email: user?.email, role: user?.role }, refreshTokenSecret);
+      const accessToken = jwt.sign({ email: user?.email , role: user?.role, id: user?.id }, accessTokenSecret, { expiresIn: '240m' });
+      const refreshToken = jwt.sign({ email: user?.email, role: user?.role , id: user?.id }, refreshTokenSecret);
      const data = {
         accessToken,
         refreshToken,

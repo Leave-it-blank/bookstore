@@ -19,7 +19,7 @@ export default function Home({ books, author }: any) {
                     <Image
                       height={250}
                       width={200}
-                      src={book.thumbUrl[0]} // Replace with your book cover image URL
+                      src={JSON.parse(book.thumbUrl)[0]} // Replace with your book cover image URL
                       alt="Book 1"
                       className="w-48 h-60 rounded-lg shadow-md object-contain"
                     />

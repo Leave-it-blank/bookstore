@@ -3,7 +3,10 @@ import { useState } from "react";
 import Image from 'next/image';
 import toast from "react-hot-toast";
 import { v4 as uuidv4 } from 'uuid';
+import { useUser } from "@/store/user";
+import { useRouter } from "next/router";
 interface chapters {
+    id: number;
     number: string;
     title: string;
     heading: string;
@@ -17,6 +20,12 @@ interface chapters {
 function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
 
     const [selectedChapter, setSelectedChapter] = useState(0);
+    const { user, token } = useUser();
+    const router = useRouter();
+
+    // const chapterArray = Object.keys(Chapters).map((key: any) => {
+    //     return Chapters[key];
+    // });
 
     // const [form, setForm] = useState({
     //     itemID: Chapters[selectedChapter].number,
@@ -26,38 +35,74 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
     //     quantity: 1,
     //     price: Chapters[selectedChapter].price,
     // });
-    const handleAddChapterToCart = (e: any) => {
+    const handleAddChapterToCart = async (e: any) => {
         e.preventDefault();
         // addToCart(form);
-        let cart = localStorage.getItem('cart');
-        if (cart) {
-            let cartArray = JSON.parse(cart);
-            cartArray.push({
-                itemID: uuidv4() + Chapters[selectedChapter].number,
-                itemName: Chapters[selectedChapter].title,
-                itemType: 'chapter',
-                type: 'digital',
-                quantity: 1,
-                price: Chapters[selectedChapter].price,
-            });
-            localStorage.setItem('cart', JSON.stringify(cartArray));
-        } else {
-            let cartArray = [{
-                itemID: uuidv4() + Chapters[selectedChapter].number,
-                itemName: Chapters[selectedChapter].title,
-                itemType: 'chapter',
-                type: 'digital',
-                quantity: 1,
-                price: Chapters[selectedChapter].price,
-            }];
-            localStorage.setItem('cart', JSON.stringify(cartArray));
+        // let cart = localStorage.getItem('cart');
+        // if (cart) {
+        //     let cartArray = JSON.parse(cart);
+        //     cartArray.push({
+        //         itemID: uuidv4() + Chapters[selectedChapter].number,
+        //         itemName: Chapters[selectedChapter].title,
+        //         itemType: 'chapter',
+        //         type: 'digital',
+        //         quantity: 1,
+        //         price: Chapters[selectedChapter].price,
+        //     });
+        //     localStorage.setItem('cart', JSON.stringify(cartArray));
+        // } else {
+        // let cartArray = [{
+        //     itemID: uuidv4() + Chapters[selectedChapter].number,
+        //     itemName: Chapters[selectedChapter].title,
+        //     itemType: 'chapter',
+        //     type: 'digital',
+        //     quantity: 1,
+        //     price: Chapters[selectedChapter].price,
+        // }];
+        //     localStorage.setItem('cart', JSON.stringify(cartArray));
+        // }
+        // toast.success('Added to cart');
+
+        if (!user) {
+            router.push('/login');
+            toast.error("Please login to continue")
+            return;
         }
-        toast.success('Added to cart');
+        if (!token) {
+            toast.error("Please login to continue")
+            return;
+        }
+        await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/cart/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
 
+            body: JSON.stringify({
+                itemType: 'CHAPTER',
+                type: 'digital',
+                quantity: 1,
+                price: Chapters[selectedChapter].price, chapterId: Chapters[selectedChapter].id
+            }),
+        }).then(async (res) => {
+            const data = await res.json();
+            if (res.ok) {
+                toast.success("Added to cart")
+                router.push('/cart');
 
+            } else {
+                if (data.error) {
+                    toast.error(data.error)
+                } else {
+                    toast.error("Something went wrong. Please try again")
+                }
+
+            }
+        }).catch((err) => {
+            console.log(err);
+            toast.error("Something went wrong. Please try again")
+        });
     }
     return (
-        <div className="inline-flex flex-col items-start  gap-10 relative" >
+        <div className="inline-flex flex-col items-start  gap-10 relative w-full" >
             <div className="relative w-fit  text-black text-[32px] tracking-[0] leading-[normal]">
                 <label htmlFor="chapters" className="relative w-fit  font-bold text-black  tracking-[0] leading-[normal]">
                     Chapters:
@@ -73,7 +118,7 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
                     name="chapters" className="relative w-48 h-14 bg-white shadow-md rounded-xl  p-3 ">
                     {
                         Chapters.map((chapter: any, index: number) => {
-                            return <option key={chapter.number} value={index} > {"Chapter " + chapter.number}</option>
+                            return <option key={index} value={index} > {"Chapter " + chapter.number}</option>
                         })
                     }
                 </select>
@@ -82,12 +127,12 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
                 </button>
             </div>
 
-            <div className="inline-flex flex-col items-start gap-[27px] relative flex-[0_0_auto]">
+            <div className="inline-flex flex-col items-start gap-[27px] relative  w-full">
 
                 <p className="relative w-fit mt-[-1.00px] [font-family:'Mulish-Bold',Helvetica] font-bold text-black text-[27px] tracking-[0] leading-[normal]">
                     {"Chapter " + Chapters[selectedChapter].number} : {Chapters[selectedChapter].title}
                 </p>
-                <p className="relative  [ font-normal text-black text-[25px] tracking-[0] leading-normal">
+                <p className="relative  [ font-normal text-black text-[25px] tracking-[0] leading-normal w-full">
                     {Chapters[selectedChapter].heading}
                 </p>
                 <h2 className="relative  font-bold text-[32px] tracking-[0] leading-normal">
@@ -95,7 +140,7 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
                 </h2>
                 <div className="flex gap-2  flex-col">
                     {
-                        Chapters[selectedChapter].introduction.map((intro: any, index: number) => {
+                        JSON.parse(String(Chapters[selectedChapter].introduction)).map((intro: any, index: number) => {
                             return <li key={index} className="relative  [ font-normal text-black text-[25px]   leading-tight">
                                 {intro}
                             </li>
@@ -107,7 +152,7 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
                 </h2>
                 <div className="flex gap-2  flex-col">
                     {
-                        Chapters[selectedChapter].goals.map((intro: any, index: number) => {
+                        JSON.parse(String(Chapters[selectedChapter].goals)).map((intro: any, index: number) => {
                             return <li key={index} className="relative  font-normal text-black text-[25px]   leading-tight">
                                 {intro}
                             </li>

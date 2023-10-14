@@ -16,6 +16,7 @@ model User {
   role     Role     @default(USER)
   orders   Order[]
   profile  Profile?
+  Cart     Cart?
 }
 
 model Profile {
@@ -26,18 +27,19 @@ model Profile {
 }
 
 model Chapter {
-  id           Int      @id @unique @default(autoincrement())
-  number       Float    @unique
-  title        String
-  category     CATEGORY @default(CHAPTER)
+  id           Int         @id @unique @default(autoincrement())
+  number       Float       @unique
+  title        String      @db.MediumText
+  category     CATEGORY    @default(CHAPTER)
   price        Float
-  imageUrl     String
-  heading      String
-  introduction String
-  goalsTitle   String
-  goals        String
+  imageUrl     String      @db.LongText
+  heading      String      @db.LongText
+  introduction String      @db.LongText
+  goalsTitle   String      @db.LongText
+  goals        String      @db.LongText
   productId    Int
-  Product      Product  @relation(fields: [productId], references: [id])
+  Product      Product     @relation(fields: [productId], references: [id])
+  CartItems    CartItems[]
 
   @@index([productId], map: "Chapter_productId_fkey")
 }
@@ -45,12 +47,12 @@ model Chapter {
 model Author {
   id         Int      @id @unique @default(autoincrement())
   name       String
-  jobTitle   String
-  degree     String
-  college    String
+  jobTitle   String   @db.MediumText
+  degree     String   @db.MediumText
+  college    String   @db.MediumText
   city       String
-  about      String
-  imageUrl   String
+  about      String   @db.LongText
+  imageUrl   String   @db.LongText
   linkdInUrl String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -88,9 +90,9 @@ model Product {
   titleSlug     String           @unique
   title         String
   category      Product_category @default(BOOK)
-  thumbUrl      String
+  thumbUrl      String           @db.LongText
   rating        Float
-  description   String?
+  description   String?          @db.LongText
   priceDigital  Float
   priceHardCopy Float
   authorId      Int
@@ -98,6 +100,7 @@ model Product {
   updatedAt     DateTime
   Chapter       Chapter[]
   OrderItem     OrderItem[]
+  CartItems     CartItems[]
 
   @@index([authorId], map: "Product_authorId_fkey")
 }
@@ -122,6 +125,32 @@ model PreOrder {
   message   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id        Int         @id @unique @default(autoincrement())
+  userId    Int         @unique
+  total     Float?
+  discount  Float?
+  promo     String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  user      User        @relation(fields: [userId], references: [id])
+  CartItems CartItems[]
+}
+
+model CartItems {
+  id        Int              @id @unique @default(autoincrement())
+  cartId    Int
+  productId Int?
+  chapterId Int?
+  quantity  Int
+  price     Float
+  category  Product_category
+  type      String           @default("DIGITAL")
+  product   Product?         @relation(fields: [productId], references: [id])
+  chapter   Chapter?         @relation(fields: [chapterId], references: [id])
+  cart      Cart             @relation(fields: [cartId], references: [id])
 }
 
 enum Role {

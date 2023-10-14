@@ -23,11 +23,7 @@ export const Author = ({ Author }: { Author: AuthorProps }): JSX.Element => {
             </div>
             <div className=" items-center xl:items-start gap-7 xl:gap-14   flex flex-col xl:flex-row relative">
                 <div className="flex-col items-start gap-[16px] flex-[0_0_auto] inline-flex relative">
-                    {/* <img
-                        className="relative w-[312px] h-[312px] mt-[-19.00px] ml-[-23.00px] mr-[-23.00px] object-cover"
-                        alt="Rectangle"
-                        src="rectangle-5.png"
-                    /> */}
+
                     <Image
                         className="relative w-[200px] h-[230px] mt-[-4.00px] mb-[-12.00px] mr-[-8.00px] rounded-xl   "
                         alt="Group"

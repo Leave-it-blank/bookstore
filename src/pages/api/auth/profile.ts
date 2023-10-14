@@ -19,7 +19,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
         }
         jwt.verify(token, accessTokenSecret, (err: any, user: any) => {
             if (err) {
-                return res.status(403).json({ status: "error" , message: "Unauthorized."});
+                return res.status(403).json({ status: "error" , message: "Token Expired."});
             }
             return res.json({
                 message: "Profile fetched successfully.",
@@ -31,7 +31,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     
     
 
-    res.status(200).json({ token: "" , refreshToken: "" , message: 'User registered successfully'   });
+    res.status(400).json({ token: "" , refreshToken: "" , message: 'Token Expired.'   });
   } catch (error) {
     res.status(400).json({ error: 'User registration failed' });
   }

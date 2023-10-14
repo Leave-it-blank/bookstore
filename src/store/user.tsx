@@ -18,6 +18,7 @@ interface User {
   id: number;
   username: string;
   email: string;
+
 }
 
 interface UserContextType {
@@ -25,6 +26,8 @@ interface UserContextType {
   setUser: (user: User | null) => void;
   getuser: () => void;
   loading: boolean;
+  token: string;
+
 }
 
 export const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -40,11 +43,13 @@ export function useUser() {
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [token, setToken] = useState<string>("");
 
   const getuser = async () => {
     try {
       const token = localStorage.getItem("token");
       if (token) {
+        setToken(token);
         const data = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/auth/profile`, {
           method: "GET",
           headers: {
@@ -57,6 +62,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
           setUser(response.user);
         } else {
           setUser(null);
+          localStorage.removeItem("token");
 
         }
       }
@@ -73,7 +79,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, getuser, loading }}> {/* Provide the context value */}
+    <UserContext.Provider value={{ user, setUser, getuser, loading, token }}> {/* Provide the context value */}
       {children}
     </UserContext.Provider>
   );

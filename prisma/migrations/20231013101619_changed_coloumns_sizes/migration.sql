@@ -1,0 +1,18 @@
+-- AlterTable
+ALTER TABLE `Author` MODIFY `jobTitle` MEDIUMTEXT NOT NULL,
+    MODIFY `degree` MEDIUMTEXT NOT NULL,
+    MODIFY `college` MEDIUMTEXT NOT NULL,
+    MODIFY `about` LONGTEXT NOT NULL,
+    MODIFY `imageUrl` LONGTEXT NOT NULL;
+
+-- AlterTable
+ALTER TABLE `Chapter` MODIFY `title` MEDIUMTEXT NOT NULL,
+    MODIFY `imageUrl` LONGTEXT NOT NULL,
+    MODIFY `heading` LONGTEXT NOT NULL,
+    MODIFY `introduction` LONGTEXT NOT NULL,
+    MODIFY `goalsTitle` LONGTEXT NOT NULL,
+    MODIFY `goals` LONGTEXT NOT NULL;
+
+-- AlterTable
+ALTER TABLE `Product` MODIFY `thumbUrl` LONGTEXT NOT NULL,
+    MODIFY `description` LONGTEXT NULL;

@@ -3,7 +3,7 @@ import { Key, useState, useContext, useEffect } from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useUser } from '../store/user';
-
+import { useRouter } from 'next/router';
 const Register: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,14 +12,15 @@ const Register: React.FC = () => {
     const [name, setName] = useState('');
     const [errors, setErrors] = useState<any>([]);
     const UserContext = useUser();
+    const router = useRouter();
     useEffect(() => {
         if (UserContext.user != null) {
-            window.location.href = "/";
+            router.push('/')
         }
-    }, [UserContext]);
+    }, [UserContext, router]);
 
     const userRegisterRequest = async (userData: { name: string, email: string, password: string, city: string }) => {
-        await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}}/api/auth/register`, {
+        await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),
@@ -28,7 +29,8 @@ const Register: React.FC = () => {
             if (res.ok) {
                 console.log(data)
                 toast.success("Successfully Registered.");
-                window.location.href = '/login?email=' + email + "?successfullyRegistered=true";
+                router.push('/login?email=' + email + '?successfullyRegistered=true')
+                // window.location.href = '/login?email=' + email + "?successfullyRegistered=true";
             } else {
                 if (data.error) {
                     setErrors([data.error]);

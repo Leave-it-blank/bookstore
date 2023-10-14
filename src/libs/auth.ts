@@ -22,3 +22,28 @@ export async function validateEmail(email: string) {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;      
     return emailRegex.test(email);
 }
+
+
+export async function authenticated(req : any){
+    try {
+      const authorizationHeader = req.headers.authorization;
+
+      if (!authorizationHeader) {
+        // No authorization header provided
+        return false
+      }
+      const token = authorizationHeader.replace('Bearer ', '');
+  
+        const decoded = jwt.verify(token, accessTokenSecret);
+         
+        if(decoded){
+           // console.log(decoded)
+            return decoded;
+        }
+     
+       
+      } catch (err) {
+        return false;
+      }
+    return false;
+}

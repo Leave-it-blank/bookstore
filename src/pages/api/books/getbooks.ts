@@ -1,12 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import {  bookList } from '../../../data';
-
+import prisma from '@/libs/prisma'
 type Data = {
     name: string
 }
-export default function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -14,7 +13,7 @@ export default function handler(
         return res.status(405).json({ error: 'Method not allowed' })
     }
    // console.log(bookList)
-
+    const  bookList = await prisma.product.findMany();
 
     if (!bookList) {
         return res.status(404).json({ error: 'Books not found' });

@@ -6,9 +6,10 @@ import { getBookBySlug } from "@/utils/api";
 
 export default function mybook({ bookData }: any) {
     const { book, chapters, author } = bookData;
+    //  console.log(chapters)
     return <>
         <div className="mx-auto flex flex-col justify-center items-center  gap-14  ">
-            <BuyBook Book={book} />
+            <BuyBook Book={book} author={author} />
             <AboutBook Descrition={book.description} />
             <AboutChapters Chapters={chapters} />
             <AboutAuthor Author={author} />
