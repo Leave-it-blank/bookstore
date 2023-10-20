@@ -4,11 +4,11 @@ const AboutBook = ({ Descrition }: { Descrition: string }): JSX.Element => {
 
 
     return (
-        <div className="inline-flex flex-col items-start gap-[45px] relative">
-            <div className="relative w-fit mt-[-1.00px] [font-family:'Mulish-ExtraBold',Helvetica] font-bold text-black text-[32px] tracking-[0] leading-[normal]">
+        <div className="flex flex-col items-start gap-5 relative">
+            <div className="relative w-fit   font-bold text-black   text-2xl md:text-3xl   ">
                 About Book
             </div>
-            <p className="relative     font-normal text-black text-[25px] tracking-[0] leading-normal">
+            <p className="relative     font-normal text-black  text-sm sm:text-md md:text-lg text-justify  ">
                 {Descrition}
             </p>
         </div>

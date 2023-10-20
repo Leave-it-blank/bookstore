@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useUser } from '@/store/user';
 import { useRouter } from 'next/router';
 import { loadStripe } from '@stripe/stripe-js';
+import CartItem from '@/components/cart/CartItem';
 const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ? loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ) : null;
@@ -166,127 +167,107 @@ const Checkout = () => {
 
     if (!user) {
         return <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col ">
-            <h1 className="text-3xl font-semibold mb-4"> Your Cart</h1>
-            <p className='text-[25px] flex justify-center h-[400px] items-center'>You need to login first.</p>
+            <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Are you supposed to be here?</h1>
+            <p className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>Who are you...?</p>
         </div>
     }
     if (cartLoading) return (
-        <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col ">
-            <h1 className="text-3xl font-semibold mb-4"> Your Cart</h1>
-            <p className='text-[25px] flex justify-center h-[400px] items-center'>Loading...</p>
+        <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col">
+            <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Your Checkout List</h1>
+            <div className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>
+                <div className="animate-spin rounded-full border-t-4 border-neutral-700 border-solid h-12 w-12 ">
+
+                </div>
+            </div>
+
         </div>
     )
 
     return (
-        <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col ">
-            <h1 className="text-3xl font-semibold mb-4"> Your Cart</h1>
-            {cart.length === 0 ? (
-                <p className='text-[25px] flex justify-center h-[400px] items-center'>Your cart is empty.</p>
-            ) : (
-                <>{
-                    cart.CartItems.length === 0 ? (
-                        <p className='text-[25px] flex justify-center h-[400px] items-center'>Your cart is empty.</p>
-                    ) : (
+        <>   <h1 className="text-2xl md:text-3xl  font-semibold mb-4"> Checkout Basket</h1>
 
-                        <div className='flex flex-col gap-5'>
-                            {cart.CartItems.map((item: any) => (
-                                <div
-                                    key={item.id}
-                                    className=" grid grid-cols-8 justify-center gap-10 items-center border-b border-gray-300 py-2"
-                                >
-                                    <div className='col-span-1 flex justify-center flex-col gap-1 items-center capitalize border-r'>
-                                        <p className="text-lg font-semibold">{item.category}</p>
-                                        <p className="text-lg font-semibold">{item.type}</p>
+            <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col  py-4">
 
+                {cart.length === 0 ? (
+                    <p className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>Nothing to see.</p>
+                ) : (
+                    <>{
+                        cart.CartItems.length === 0 ? (
+                            <p className='  text-xl md:text-2xl  flex justify-center h-[400px] items-center'>Nothing to see.</p>
+                        ) : (
 
-                                    </div>
+                            <div className='flex flex-col gap-3 md:gap-5'>
+                                {cart.CartItems.map((item: any) => (
+                                    <CartItem key={item.id} item={item} />
+                                ))}
+
+                                <div className=" ">
                                     {
-                                        item.category === 'BOOK' ? (
-                                            <div className='col-start-2 col-span-3 border-r'>
-                                                <p className="text-lg font-semibold">{item.product.title}</p>
-                                            </div>
-                                        ) : (
-                                            <div className='col-start-2 col-span-3 border-r'>
-                                                <p className="text-lg font-semibold">{item.chapter.title} - Chapter {item.chapter.number}</p>
-                                            </div>
+                                        cart.promo && cart.total > 500 && (<div className=" text-green-500 text-sm text-start px-4 py-2 bg-green-50 my-3 ">
+                                            <div className="flex  w-full  items-center justify-between ">
+                                                <div className="capitalize  " > {cart.promo}</div>
 
-                                        )
-                                    }
-                                    <div className='col-start-5 border-r'>
-                                        <p className="text-lg font-semibold">{item.quantity + " qty"}</p>
-                                    </div>
-                                    <div className='col-start-7 border-r'>
-                                        <p className="text-gray-600">₹{item.price}</p>
-                                    </div>
-
-                                </div>
-                            ))}
-
-                            <div className="mt-4 ">
-                                {
-
-                                    cart.promo ? (
-                                        <div className="flex flex-col  justify-center items-start gap-1">
-                                            <div className="flex flex-wrap w-full gap-5 items-center justify-start ">
-                                                <div className="capitalize text-green-500 text-xl" > {cart.promo}</div>
-                                                <div className="text-md font-semibold "> {""}</div>
                                                 <button className="capitalize text-xs text-red-500 justify-self-end self-end  items-end" onClick={removePromo} >remove</button>
                                             </div>
-                                            <div> <span className="text-md font-bold"> Discount :</span> <span className="text-2xl font-light stroke-violet-300">{cart.discount} %</span> </div>
-                                        </div>
-                                    )
-                                        :
+                                        </div>)
+                                    }
+
+                                    {
+
+                                        !cart.promo &&
                                         <>
 
                                             <div className="flex flex-col md:flex-row gap-5 md:items-center justify-start">
 
 
-                                                <h2 className="font-bold text-sm md:text-xl"> {"Promo Codes : "} </h2>
+                                                <h2 className="font-bold text-md md:text-lg"> {"Promo Codes : "} </h2>
 
-                                                <input onChange={(e) => setPromo(e.target.value)} type="text" name="promo" placeholder="Enter Promo Code" className="border rounded-md p-2 w-3/5" />
+                                                <input onChange={(e) => setPromo(e.target.value)} type="text" name="promo" placeholder="Enter Promo Code" className="border rounded-md p-2 md:w-3/5" />
 
                                                 <button onClick={applyPromo} className="inline-flex w-full text-white md:w-fit  items-center justify-center   px-10 py-2 relative   bg-neutral-800 rounded-xl overflow-hidden">Apply</button>
                                             </div>
-                                            {
-                                                promoError && (<div className=" text-red-400 text-sm text-center "> {promoError}</div>)
-                                            }
+
                                         </>
-                                }
+                                    }
+                                    {
+                                        promoError && (<div className=" text-red-400 text-sm text-start px-4 py-2 bg-red-50 my-3 "> {promoError}</div>)
+                                    }
 
+                                </div>
+
+                                <div className="mt-2">
+
+                                    {
+                                        cart.promo && cart.total > 500 ? (
+                                            <div className='flex flex-col gap-1 justify-center md:justify-end w-full items-baseline'  >
+                                                <div className="text-2xl  font-semibold">
+                                                    Total: ₹ {cart.total}
+                                                </div>
+                                                <div className="text-2xl  font-bold text-red-500">
+                                                    Discount: ₹ {cart.discount * cart.total / 100}
+                                                </div> <div className="text-2xl  font-bold text-green-500">
+                                                    Final Total: ₹ {cart.total - cart.discount * cart.total / 100}
+                                                </div>
+                                            </div>
+
+                                        ) : <> <p className="text-2xl  font-bold">
+                                            Total: ₹ {cart.total}
+                                        </p></>
+                                    }
+                                </div>
+
+                                <div className='w-full flex justify-center'>
+                                    <button onClick={handleCheckout} className="inline-flex w-full text-white md:w-fit  items-center justify-center   px-20 py-4 relative   bg-black rounded-[16px] overflow-hidden">
+                                        Pay Now
+                                    </button>
+                                </div>
                             </div>
-
-                            <div className="mt-4">
-
-                                {
-                                    cart.promo && cart.total > 500 ? (
-                                        <>
-                                            <p className="text-2xl  font-semibold">
-                                                Total: ₹ {cart.total}
-                                            </p>
-                                            <p className="text-2xl  font-bold">
-                                                Discount: ₹ {cart.discount * cart.total / 100}
-                                            </p> <p className="text-2xl  font-bold">
-                                                Final Total: ₹ {cart.total - cart.discount * cart.total / 100}
-                                            </p>
-                                        </>
-
-                                    ) : <> <p className="text-2xl  font-bold">
-                                        Total: ₹ {cart.total}
-                                    </p></>
-                                }
-                            </div>
-                            <br />
-                            <div className='w-full flex justify-center'>
-                                <button onClick={handleCheckout} className="inline-flex w-full text-white md:w-fit  items-center justify-center   px-20 py-4 relative   bg-black rounded-[16px] overflow-hidden">
-                                    Checkout
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                </>
-            )
-            }
-        </div >
+                        )}
+                    </>
+                )
+                }
+            </div >
+        </ >
     );
 };
 export default Checkout;

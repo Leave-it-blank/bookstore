@@ -96,7 +96,7 @@ const Register: React.FC = () => {
     };
 
     return (
-        <div className=" min-h-[600px] flex items-center justify-center bg-gray-50">
+        <div className="min-h-[450px] md:min-h-[700px] flex items-center justify-center bg-gray-50">
             <div className="max-w-md w-full p-6 bg-white shadow-md rounded-lg">
                 <h2 className="text-2xl font-semibold mb-6">Register</h2>
                 {

@@ -6,16 +6,16 @@ export default function Home({ books, author }: any) {
   return (
     <>
       <div className="min-h-screen">
-        <main className="container mx-auto p-4">
-          <h2 className="text-[32px] font-bold mb-4 ">Featured Books</h2>
+        <main className="  md:p-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 ">Featured Books</h2>
           {
             books.map((book: any, index: number) => {
               return (<section key={index} className="my-8">
 
 
-                <div className="flex space-x-4 w-full gap-5">
+                <div className="flex flex-col md:flex-row   w-full gap-5">
                   {/* Book 1 */}
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 self-center ">
                     <Image
                       height={250}
                       width={200}
@@ -24,10 +24,10 @@ export default function Home({ books, author }: any) {
                       className="w-48 h-60 rounded-lg shadow-md object-contain"
                     />
                   </div>
-                  <div>
-                    <Link href={`books/${book.titleSlug}`}>  <h3 className=" text-[25px]  font-semibold hover:text-sky-600  hover:cursor-pointer">{book.title}</h3>  </Link>
+                  <div className='self-start'>
+                    <Link href={`books/${book.titleSlug}`}>  <h3 className=" text-xl md:text-2xl  font-semibold hover:text-sky-600  hover:cursor-pointer">{book.title}</h3>  </Link>
                     {/* <p className="text-gray-600">Author: {book.author}</p> */}
-                    <p className="mt-2  text-[20px]    w-full max-w-7xl  text-justify">
+                    <p className="mt-2  text-sm sm:text-md md:text-lg   w-full max-w-7xl  text-justify">
                       {
                         book.description
                       }

@@ -17,12 +17,12 @@ export const Author = ({ Author }: { Author: AuthorProps }): JSX.Element => {
 
 
     return (
-        <div className="inline-flex flex-col items-start gap-10 relative">
-            <div className="relative w-fit mt-[-1.00px]  font-bold text-black text-[32px] tracking-[0] leading-[normal]">
+        <div className="flex  flex-col items-start gap-5 relative">
+            <div className="relative w-fit mt-[-1.00px]  font-bold text-black  text-2xl md:text-3xl  tracking-[0] leading-[normal]">
                 About Author
             </div>
-            <div className=" items-center xl:items-start gap-7 xl:gap-14   flex flex-col xl:flex-row relative">
-                <div className="flex-col items-start gap-[16px] flex-[0_0_auto] inline-flex relative">
+            <div className=" items-center xl:items-start gap-3 md:gap-14   flex flex-col md:flex-row relative">
+                <div className="flex-col items-start gap-[16px] flex-[0_0_auto]  flex  justify-center md:py-5 relative">
 
                     <Image
                         className="relative w-[200px] h-[230px] mt-[-4.00px] mb-[-12.00px] mr-[-8.00px] rounded-xl   "
@@ -32,14 +32,14 @@ export const Author = ({ Author }: { Author: AuthorProps }): JSX.Element => {
                     />
                     <div className="flex-col items-start gap-3 mt-2  inline-flex relative w-full">
                         <div className="flex-col items-center gap-[5px] flex-[0_0_auto] inline-flex relative justify-center">
-                            <div className="relative w-fit mt-[-1.00px]  font-semibold text-black text-[30px] tracking-[0] leading-[normal]">
+                            <div className="relative w-fit mt-[-1.00px]  font-semibold text-black   text-2xl md:text-3xl  tracking-[0] leading-[normal]">
                                 {Author.name}
                             </div>
-                            <div className="relative w-fit  font-normal text-black text-[20px] tracking-[0] leading-[normal]">
+                            <div className="relative w-fit  font-normal text-black  text-xl md:text-2xl  tracking-[0] leading-[normal]">
                                 {Author.jobTitle}
                             </div>
                         </div>
-                        <p className="relative    text-center font-light text-black text-[14px]  flex justify-center w-full tracking-[0] leading-[tight]">
+                        <p className="relative    text-center font-light text-black  text-lg md:text-xl  flex justify-center w-full tracking-[0] leading-[tight]">
                             {Author.degree}
                             <br />
                             {Author.college}
@@ -48,13 +48,13 @@ export const Author = ({ Author }: { Author: AuthorProps }): JSX.Element => {
                         </p>
                     </div>
                 </div>
-                <div className="flex-col items-start gap-10   inline-flex relative">
-                    <p className="relative  mt-[-1.00px]  font-normal text-black text-[25px] tracking-[0] leading-[normal]">
-                        <span className=" font-normal text-black text-[25px] tracking-[0]">
+                <div className="flex-col items-start gap-10   inline-flex relative  text-sm sm:text-md md:text-lg text-justify  ">
+                    <p className="relative  mt-[-1.00px]  font-normal text-black   tracking-[0] leading-[normal]">
+                        <span className=" font-normal text-black   tracking-[0]">
                             The author of the book,{" "}
                         </span>
                         <span className=" font-bold"> {Author.name} </span>
-                        <span className="text-justify font-normal text-black text-[25px] tracking-[0] leading-normal">
+                        <span className="text-justify font-normal text-black   tracking-[0] leading-normal">
 
                             {
                                 Author.about

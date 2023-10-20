@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useUser } from '@/store/user';
 import { useRouter } from 'next/router';
+import CartItem from '@/components/cart/CartItem';
 interface cart {
     itemID: number;
     itemName: string;
@@ -14,6 +15,7 @@ interface cart {
 
 const Cart = () => {
     const { user, loading, token } = useUser();
+
     const router = useRouter();
     const [reload, setReload] = useState<boolean>(false);
     const [cart, setCart] = useState<any>([]);
@@ -81,85 +83,60 @@ const Cart = () => {
     };
     if (!user) {
         return <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col ">
-            <h1 className="text-3xl font-semibold mb-4"> Your Cart</h1>
-            <p className='text-[25px] flex justify-center h-[400px] items-center'>You need to login first.</p>
+            <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Your Cart</h1>
+            <p className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>You need to login first.</p>
         </div>
     }
     if (cartLoading) return (
-        <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col ">
-            <h1 className="text-3xl font-semibold mb-4"> Your Cart</h1>
-            <p className='text-[25px] flex justify-center h-[400px] items-center'>Loading...</p>
+        <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col">
+            <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Your Cart</h1>
+            <div className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>
+                <div className="animate-spin rounded-full border-t-4 border-neutral-700 border-solid h-12 w-12 ">
+
+                </div>
+            </div>
+
         </div>
     )
 
     return (
-        <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col ">
-            <h1 className="text-3xl font-semibold mb-4"> Your Cart</h1>
-            {cart.length === 0 ? (
-                <p className='text-[25px] flex justify-center h-[400px] items-center'>Your cart is empty.</p>
-            ) : (
-                <>{
-                    cart.CartItems.length === 0 ? (
-                        <p className='text-[25px] flex justify-center h-[400px] items-center'>Your cart is empty.</p>
-                    ) : (
+        <>   <h1 className="text-2xl md:text-3xl  font-semibold mb-4"> Shopping Basket</h1>
+            <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col  py-4">
 
-                        <div className='flex flex-col gap-5'>
-                            {cart.CartItems.map((item: any) => (
-                                <div
-                                    key={item.id}
-                                    className=" grid grid-cols-8 justify-center gap-10 items-center border-b border-gray-300 py-2"
-                                >
-                                    <div className='col-span-1 flex justify-center flex-col gap-1 items-center capitalize border-r'>
-                                        <p className="text-lg font-semibold">{item.category}</p>
-                                        <p className="text-lg font-semibold">{item.type}</p>
+                {cart.length === 0 ? (
+                    <p className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>Your basket is empty.</p>
+                ) : (
+                    <>{
+                        cart.CartItems.length === 0 ? (
+                            <p className='  text-xl md:text-2xl  flex justify-center h-[400px] items-center'>Your basket is empty.</p>
+                        ) : (
 
+                            <div className='flex flex-col gap-5'>
+                                {cart.CartItems.map((item: any) => (
+                                    <CartItem key={item.id} item={item} removeItem={removeItem} />
+                                ))}
 
-                                    </div>
-                                    {
-                                        item.category === 'BOOK' ? (
-                                            <div className='col-start-2 col-span-3 border-r'>
-                                                <p className="text-lg font-semibold">{item.product.title}</p>
-                                            </div>
-                                        ) : (
-                                            <div className='col-start-2 col-span-3 border-r'>
-                                                <p className="text-lg font-semibold">{item.chapter.title} - Chapter {item.chapter.number}</p>
-                                            </div>
-
-                                        )
-                                    }
-                                    <div className='col-start-5 border-r'>
-                                        <p className="text-lg font-semibold">{item.quantity + " qty"}</p>
-                                    </div>
-                                    <div className='col-start-7 border-r'>
-                                        <p className="text-gray-600">₹{item.price}</p>
-                                    </div>
-                                    <button
-                                        onClick={() => removeItem(item)}
-                                        className="bg-neutral-800 text-white rounded-md py-2 col-start-8"
-                                    >
-                                        Remove from cart
-                                    </button>
+                                <div className="">
+                                    <p className="text-2xl font-bold">
+                                        Total: ₹ {cart.total}
+                                    </p>
                                 </div>
-                            ))}
 
-                            <div className="mt-4">
-                                <p className="text-2xl  font-bold">
-                                    Total: ₹ {cart.total}
-                                </p>
-                            </div>
-                            <br />
-                            <div className='w-full flex justify-center'>
-                                <Link href={'/payment/checkout'} className="inline-flex w-full text-white md:w-fit  items-center justify-center   px-20 py-4 relative   bg-black rounded-[16px] overflow-hidden">
-                                    Checkout
-                                </Link>
-                            </div>
+                                <div className='w-full flex justify-center items-center'>
+                                    <Link href={'/payment/checkout'} className="inline-flex w-full text-white md:w-fit  items-center justify-center   px-20 py-4 relative   bg-black rounded-[16px] overflow-hidden">
 
-                        </div>
-                    )}
-                </>
-            )
-            }
-        </div >
+
+                                        Checkout
+                                    </Link>
+                                </div>
+
+                            </div>
+                        )
+                    }
+                    </>
+                )
+                }
+            </div ></>
     );
 };
 

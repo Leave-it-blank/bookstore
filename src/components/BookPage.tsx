@@ -71,7 +71,7 @@ function mybook() {
 
     }]
     return <>
-        <div className="mx-auto flex flex-col justify-center items-center  gap-14  ">
+        <div className="mx-auto flex flex-col justify-center items-center  gap-5  ">
             <BuyBook Book={Book} />
             <AboutBook Descrition={Book.description} />
             <AboutChapters Chapters={chapters} />

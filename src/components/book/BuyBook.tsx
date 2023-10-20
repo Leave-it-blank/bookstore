@@ -202,6 +202,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                         <div className="modal-body   relative">
                             <FormComponent closeModal={closeModal} form={form} userDetails={userDetails} setUserDetails={setUserDetails} />
                         </div>
+
                     </Modal>
 
 
@@ -247,61 +248,8 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
             </div>
             <div className="flex flex-col   items-start relative  overflow-hidden  w-full  ">
                 <div className="inline-flex items-start gap-[13px] relative w-full ">
-                    <div className="relative  w-full h-[400px] xl:h-[470px]">
-                        <div className="inline-flex flex-col items-start gap-[25px] absolute top-[198px] left-0">
-                            <div className="relative w-fit mt-[-1.00px]   font-semibold text-black text-[57px] tracking-[0] leading-[normal]">
-                                <span>  ₹</span> {form.price}
-                            </div>
-                            <div className="inline-flex items-start gap-[25px] relative ">
+                    <div className="relative  w-full min-h-[400px] xl:h-[470px]">
 
-                                <label className="inline-flex items-center gap-3 relative ">
-                                    <input
-                                        type="radio"
-                                        value="HARDCOPY"
-                                        className="w-5 h-5"
-                                        checked={form.type === 'HARDCOPY'}
-                                        onChange={handleOptionChange}
-                                        id="hardcopy-radio"
-
-                                    />
-                                    <div className="relative w-fit mt-[-1.00px] font-medium text-black text-[21px] tracking-[0] leading-[normal]">
-                                        Hardcopy
-                                    </div>
-                                </label>
-
-                                <label className="inline-flex items-center  gap-3 relative ">
-                                    <input
-                                        type="radio"
-                                        value="DIGITAL"
-                                        className="w-5 h-5"
-                                        checked={form.type === 'DIGITAL'}
-                                        onChange={handleOptionChange}
-                                        id="digital-radio"
-                                    />
-                                    <div className="relative w-fit mt-[-1.00px] font-medium text-black text-[21px] tracking-[0] leading-[normal]">
-                                        Digital
-                                    </div>
-                                </label>
-
-                            </div>
-                            {form.type === 'HARDCOPY' ?
-                                (<div className="flex flex-row items-center gap-10  relative ">
-                                    <label htmlFor="quantity" className="relative w-fit [font-family:'Mulish-SemiBold',Helvetica] font-semibold text-black text-[25px] tracking-[0] leading-[normal]">
-                                        Quantity:
-                                    </label>
-                                    <select
-                                        id="quantity"
-                                        name="quantity"
-                                        className="relative w-28 h-14 bg-white shadow-md rounded-xl  p-3 "
-                                        value={form.quantity}
-                                        onChange={handleQuantityChange}
-                                    >
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                </div>) : null}
-                        </div>
                         <div className="inline-flex flex-col items-start gap-[14px] absolute top-0 left-0">
                             <div className="inline-flex flex-col items-start gap-[9px] relative flex-[0_0_auto]">
                                 <p className="relative w-fit mt-[-1.00px] [font-family:'Mulish-Bold',Helvetica]  font-bold text-black text-[38px] tracking-[0] leading-[normal]">
@@ -331,6 +279,61 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                                 <div className="relative w-fit  font-medium text-black text-[14px] tracking-[0] leading-[normal]">
                                     {Book.rating} <span> star ratings</span>
                                 </div>
+
+                            </div>
+                            <div className="inline-flex flex-col items-start  ">
+                                <div className="relative w-fit     font-semibold text-black text-[57px]  ">
+                                    <span>  ₹</span> {form.price}
+                                </div>
+                                <div className="inline-flex items-start gap-[25px] relative ">
+
+                                    <label className="inline-flex items-center gap-3 relative ">
+                                        <input
+                                            type="radio"
+                                            value="HARDCOPY"
+                                            className="w-5 h-5"
+                                            checked={form.type === 'HARDCOPY'}
+                                            onChange={handleOptionChange}
+                                            id="hardcopy-radio"
+
+                                        />
+                                        <div className="relative w-fit mt-[-1.00px] font-medium text-black text-[21px] tracking-[0] leading-[normal]">
+                                            Hardcopy
+                                        </div>
+                                    </label>
+
+                                    <label className="inline-flex items-center  gap-3 relative ">
+                                        <input
+                                            type="radio"
+                                            value="DIGITAL"
+                                            className="w-5 h-5"
+                                            checked={form.type === 'DIGITAL'}
+                                            onChange={handleOptionChange}
+                                            id="digital-radio"
+                                        />
+                                        <div className="relative w-fit mt-[-1.00px] font-medium text-black text-[21px] tracking-[0] leading-[normal]">
+                                            Digital
+                                        </div>
+                                    </label>
+
+                                </div>
+                                {form.type === 'HARDCOPY' ?
+                                    (<div className="flex flex-row items-center gap-10  relative ">
+                                        <label htmlFor="quantity" className="relative w-fit [font-family:'Mulish-SemiBold',Helvetica] font-semibold text-black text-[25px] tracking-[0] leading-[normal]">
+                                            Quantity:
+                                        </label>
+                                        <select
+                                            id="quantity"
+                                            name="quantity"
+                                            className="relative w-28 h-14 bg-white shadow-md rounded-xl  p-3 "
+                                            value={form.quantity}
+                                            onChange={handleQuantityChange}
+                                        >
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>) : null}
                             </div>
                         </div>
                     </div>

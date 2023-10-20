@@ -162,7 +162,7 @@ export default function NavBar() {
                                             })}
                                             {
                                                 logged && (
-                                                    <button className=" btn hover:animate-pulse  bg-[#E0E4EF]  py-2 px-2 cursor-pointer rounded-md   w-full text-right" onClick={logout}>Logout</button>
+                                                    <button className=" btn hover:animate-pulse  bg-[#efe0e0]  py-2 px-2 cursor-pointer rounded-md   w-full text-right" onClick={logout}>Logout</button>
                                                 )
                                             }
                                         </div>

@@ -102,13 +102,13 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
         });
     }
     return (
-        <div className="inline-flex flex-col items-start  gap-10 relative w-full" >
-            <div className="relative w-fit  text-black text-[32px] tracking-[0] leading-[normal]">
-                <label htmlFor="chapters" className="relative w-fit  font-bold text-black  tracking-[0] leading-[normal]">
+        <div className="inline-flex flex-col items-start  gap-5 md:gap-10 relative w-full" >
+            <div className="relative w-fit  text-black  text-2xl md:text-3xl ">
+                <label htmlFor="chapters" className="relative w-fit  font-bold text-black  ">
                     Chapters:
                 </label>
             </div>
-            <div className="w-full flex justify-between">
+            <div className="w-full flex justify-between gap-5">
 
                 <select id="chapters"
                     value={selectedChapter}
@@ -122,38 +122,38 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
                         })
                     }
                 </select>
-                <button className="relative w-48 h-14 bg-black text-white shadow-md rounded-xl  p-3 " onClick={handleAddChapterToCart}>
+                <button className="relative w-40 h-14 bg-black text-white shadow-md rounded-xl  p-3 " onClick={handleAddChapterToCart}>
                     Buy Chapter
                 </button>
             </div>
 
-            <div className="inline-flex flex-col items-start gap-[27px] relative  w-full">
+            <div className="inline-flex flex-col items-start gap-3 md:gap-5 relative  w-full">
 
-                <p className="relative w-fit mt-[-1.00px] [font-family:'Mulish-Bold',Helvetica] font-bold text-black text-[27px] tracking-[0] leading-[normal]">
+                <p className="relative w-fit  font-bold text-black text-xl md:text-2xl    ">
                     {"Chapter " + Chapters[selectedChapter].number} : {Chapters[selectedChapter].title}
                 </p>
-                <p className="relative  [ font-normal text-black text-[25px] tracking-[0] leading-normal w-full">
+                <p className="relative  [ font-normal text-black  text-sm sm:text-md md:text-lg text-justify  w-full">
                     {Chapters[selectedChapter].heading}
                 </p>
-                <h2 className="relative  font-bold text-[32px] tracking-[0] leading-normal">
+                <h2 className="relative  font-bold text-xl md:text-2xl ">
                     {"Introduction: "}
                 </h2>
                 <div className="flex gap-2  flex-col">
                     {
                         JSON.parse(String(Chapters[selectedChapter].introduction)).map((intro: any, index: number) => {
-                            return <li key={index} className="relative  [ font-normal text-black text-[25px]   leading-tight">
+                            return <li key={index} className="relative   font-normal text-sm sm:text-md md:text-lg text-justify">
                                 {intro}
                             </li>
                         })
                     }
                 </div>
-                <h2 className="relative  font-bold text-[32px] tracking-[0] leading-normal">
+                <h2 className="relative  font-bold  text-xl md:text-2xl ">
                     {Chapters[selectedChapter].goalsTitle}
                 </h2>
                 <div className="flex gap-2  flex-col">
                     {
                         JSON.parse(String(Chapters[selectedChapter].goals)).map((intro: any, index: number) => {
-                            return <li key={index} className="relative  font-normal text-black text-[25px]   leading-tight">
+                            return <li key={index} className="relative  font-normal text-sm sm:text-md md:text-lg text-justify ">
                                 {intro}
                             </li>
                         })

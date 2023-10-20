@@ -8,7 +8,7 @@ export default function mybook({ bookData }: any) {
     const { book, chapters, author } = bookData;
     //  console.log(chapters)
     return <>
-        <div className="mx-auto flex flex-col justify-center items-center  gap-14  ">
+        <div className="mx-auto flex flex-col justify-center items-center gap-7  md:gap-10 ">
             <BuyBook Book={book} author={author} />
             <AboutBook Descrition={book.description} />
             <AboutChapters Chapters={chapters} />
