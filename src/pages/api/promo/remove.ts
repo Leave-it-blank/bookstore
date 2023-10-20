@@ -42,6 +42,7 @@ export default async  function handler(
                         discount: 0
                     },
                 })
+               
                 return res.status(200).json({
                     valid: true,
                     message: "Successfully removed promotion code",

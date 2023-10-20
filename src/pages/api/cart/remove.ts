@@ -47,6 +47,16 @@ export default async function handler(
                     total: cart.total - cartItem.price * cartItem.quantity,
                 },
             });
+            if(cart.total < 0 ){
+                await prisma.cart.update({
+                       where: {
+                           id: cart.id
+                       },
+                       data: {
+                            total: 0,
+                       },
+                   })
+               }
             await prisma.CartItems.delete({
                 where: {
                     id: req.body.id,

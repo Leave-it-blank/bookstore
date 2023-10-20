@@ -80,7 +80,9 @@ export default async function handler(
                     userId: id,
                 },
                 data: {
-                    total: cart.total + cartItem.price * cartItem.quantity,
+                    total: {
+                        increment: cartItem.price * cartItem.quantity, // Increment the total by the specified amount.
+                      },
                 },
             });
     

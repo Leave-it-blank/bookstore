@@ -40,6 +40,7 @@ model Chapter {
   productId    Int
   Product      Product     @relation(fields: [productId], references: [id])
   CartItems    CartItems[]
+  OrderItem    OrderItem[]
 
   @@index([productId], map: "Chapter_productId_fkey")
 }
@@ -73,13 +74,15 @@ model Order {
 }
 
 model OrderItem {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   quantity  Int
   price     Float
-  productId Int
+  productId Int?
+  chapterId Int?
   orderId   Int
-  order     Order   @relation(fields: [orderId], references: [id])
-  Product   Product @relation(fields: [productId], references: [id])
+  order     Order    @relation(fields: [orderId], references: [id])
+  Product   Product? @relation(fields: [productId], references: [id])
+  Chapter   Chapter? @relation(fields: [chapterId], references: [id])
 
   @@index([orderId], map: "OrderItem_orderId_fkey")
   @@index([productId], map: "OrderItem_productId_fkey")
@@ -130,7 +133,7 @@ model PreOrder {
 model Cart {
   id        Int         @id @unique @default(autoincrement())
   userId    Int         @unique
-  total     Float?
+  total     Float?      @default(0)
   discount  Float?
   promo     String?
   createdAt DateTime    @default(now())
@@ -173,4 +176,10 @@ enum OrderStatus {
 enum Product_category {
   BOOK
   CHAPTER
+}
+
+model sessions {
+  id      String @unique
+  userId  Int
+  orderId Int 
 }

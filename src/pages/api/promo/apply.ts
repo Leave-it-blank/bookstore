@@ -26,7 +26,7 @@ export default async  function handler(
         
 
         try {
-            if(promoList.includes(promo)){
+            if(promoList.includes(promo.toLowerCase())){
                 const cart = await prisma.cart.findUnique({
                     where: {
                         id: cartId
@@ -34,6 +34,9 @@ export default async  function handler(
                 })
                 if(!cart){
                     return res.status(400).json({ error: 'Invalid request' })
+                }
+                if(cart.total < 500){
+                    return res.status(400).json({ error: 'Cart total needs to be more than 500.' })
                 }
                 await prisma.cart.update({
                     where: {
