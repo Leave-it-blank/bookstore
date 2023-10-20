@@ -7,6 +7,6 @@ export default function Spin({ color, loading, classes }: { color: string, loadi
     }
 
     return (<>
-        <span className={`animate-spin rounded-full border-t-4  border-${color}-800 border-solid h-6 w-6 mx-4 ${classes} `} />
+        <div className={`animate-spin   rounded-full border-t-4  border-${color}-800 border-solid h-6 w-6 mx-4 ${classes} `} />
     </>)
 }

@@ -116,6 +116,46 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
             const data = await res.json();
             if (res.ok) {
                 toast.success("Added to cart")
+                // router.push('/cart');
+
+            } else {
+                if (data.error) {
+                    toast.error(data.error)
+                } else {
+                    toast.error("Something went wrong. Please try again")
+                }
+
+            }
+        }).catch((err) => {
+            console.log(err);
+            toast.error("Something went wrong. Please try again")
+        });
+
+
+
+    }
+
+    const handleBuyNow = async (e: any) => {
+        e.preventDefault();
+        // console.log(form);
+        if (!user) {
+            router.push('/login');
+            toast.error("Please login to continue")
+            return;
+        }
+        if (!token) {
+            toast.error("Please login to continue")
+            return;
+        }
+        await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/cart/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+
+            body: JSON.stringify({ ...form, productId: Book.id }),
+        }).then(async (res) => {
+            const data = await res.json();
+            if (res.ok) {
+                toast.success("Added to cart")
                 router.push('/cart');
 
             } else {
@@ -131,44 +171,6 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
             toast.error("Something went wrong. Please try again")
         });
 
-        // const cart = localStorage.getItem('cart');
-        // if (cart) {
-        //     const cartItems = JSON.parse(cart);
-        //     cartItems.push({
-        //         itemID: uuidv4() + Book.id,
-        //         itemName: Book.title,
-        //         itemType: Book.category,
-        //         type: form.type,
-        //         quantity: form.quantity,
-        //         price: form.price,
-        //     });
-        //     localStorage.setItem('cart', JSON.stringify(cartItems));
-        //     console.log(cartItems);
-        // } else {
-        //     localStorage.setItem('cart', JSON.stringify([{
-        //         itemID: uuidv4() + Book.id,
-        //         itemName: Book.title,
-        //         itemType: Book.category,
-        //         type: form.type,
-        //         quantity: form.quantity,
-        //         price: form.price,
-        //     }]));
-        //     console.log({
-        //         itemID: uuidv4() + Book.id,
-        //         itemName: Book.title,
-        //         itemType: Book.category,
-        //         type: form.type,
-        //         quantity: form.quantity,
-        //         price: form.price,
-        //     });
-        // }
-
-
-    }
-
-    const handleBuyNow = (e: any) => {
-        e.preventDefault();
-        console.log(form);
     }
 
     const handlePreOrder = (e: any) => {

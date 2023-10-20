@@ -86,7 +86,7 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
             const data = await res.json();
             if (res.ok) {
                 toast.success("Added to cart")
-                router.push('/cart');
+                // router.push('/cart');
 
             } else {
                 if (data.error) {
