@@ -198,7 +198,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                         className="modal-content w-full   "
                         overlayClassName="modal-overlay p-2 md:p-10 "
                     >
-
+                        {/* @ts-ignore */}
                         <div className="modal-body   relative">
                             <FormComponent closeModal={closeModal} form={form} userDetails={userDetails} setUserDetails={setUserDetails} />
                         </div>
@@ -212,7 +212,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                 <div className="flex relative justify-center overflow-hidden w-80  -z-50 bg-[#f2f2f2] rounded-2xl sm:w-[409px] sm:min-h-[462px] items-start gap-[8px]  mt-[-1.00px] ml-[-1.00px] mr-[-1.00px] drop-shadow-sm shadow-[0px_4px_23px_#00000021]">
                     <Image className=" relative rounded-2xl min-h-[460.3px] max-h-[460.6px] object-contain" alt="Image" src={thumbUrl[activeBookImageIndex]} width={383} height={450} />
                 </div>
-                <div className="inline-flex items-start gap-[13px] relative flex-[0_0_auto]">
+                <div className=" flex items-start gap-[13px] relative flex-[0_0_auto]">
                     {
                         thumbUrl.map((image: any, index: number) => (
                             <div key={index} onClick={() => {
@@ -246,12 +246,12 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
 
                 </div>
             </div>
-            <div className="flex flex-col   items-start relative  overflow-hidden  w-full  ">
-                <div className="inline-flex items-start gap-[13px] relative w-full ">
-                    <div className="relative  w-full min-h-[400px] xl:h-[470px]">
+            <div className="flex flex-col   items-start relative  overflow-hidden  w-full  gap-5 md:gap-0">
+                <div className=" flex items-start gap-[13px] relative w-full ">
+                    <div className="relative  w-full min-h-[400px] md:h-[470px]">
 
-                        <div className="inline-flex flex-col items-start gap-[14px] absolute top-0 left-0">
-                            <div className="inline-flex flex-col items-start gap-[9px] relative flex-[0_0_auto]">
+                        <div className=" flex flex-col items-start  gap-5 md:gap-10   left-0">
+                            <div className=" flex flex-col items-start gap-[9px] relative flex-[0_0_auto]">
                                 <p className="relative w-fit mt-[-1.00px] [font-family:'Mulish-Bold',Helvetica]  font-bold text-black text-[38px] tracking-[0] leading-[normal]">
                                     {Book.title}
                                 </p>
@@ -259,7 +259,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                                     by  <span> {author.name}</span> (Author)
                                 </div>
                             </div>
-                            <div className="inline-flex items-center gap-[12px] relative flex-[0_0_auto]">
+                            <div className=" flex items-center gap-[12px] relative flex-[0_0_auto]">
                                 <div className="relative w-fit h-[22px] flex">
                                     {/* Add ratings input here */}
 
@@ -281,13 +281,13 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                                 </div>
 
                             </div>
-                            <div className="inline-flex flex-col items-start  ">
+                            <div className=" flex flex-col items-start  ">
                                 <div className="relative w-fit     font-semibold text-black text-[57px]  ">
                                     <span>  ₹</span> {form.price}
                                 </div>
-                                <div className="inline-flex items-start gap-[25px] relative ">
+                                <div className=" flex items-start gap-[25px] relative ">
 
-                                    <label className="inline-flex items-center gap-3 relative ">
+                                    <label className=" flex items-center gap-3 relative ">
                                         <input
                                             type="radio"
                                             value="HARDCOPY"
@@ -302,7 +302,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                                         </div>
                                     </label>
 
-                                    <label className="inline-flex items-center  gap-3 relative ">
+                                    <label className=" flex items-center  gap-3 relative ">
                                         <input
                                             type="radio"
                                             value="DIGITAL"
@@ -318,7 +318,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
 
                                 </div>
                                 {form.type === 'HARDCOPY' ?
-                                    (<div className="flex flex-row items-center gap-10  relative ">
+                                    (<div className="flex flex-row items-center gap-10 pt-5 relative ">
                                         <label htmlFor="quantity" className="relative w-fit [font-family:'Mulish-SemiBold',Helvetica] font-semibold text-black text-[25px] tracking-[0] leading-[normal]">
                                             Quantity:
                                         </label>
@@ -339,25 +339,25 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                     </div>
                     {/* <img className="relative flex-[0_0_auto] h-[50px]" alt="Frame" src="frame-5.svg" /> */}
                 </div>
-                <div className="flex flex-row flex-wrap w-full items-center gap-5 md:gap-20 relative  justify-center ">
+                <div className="flex flex-row flex-wrap w-full items-center gap-5 md:gap-20 relative  justify-center  ">
                     {
                         form.type === 'HARDCOPY' ? (<>
 
-                            <button onClick={handlePreOrder} className="inline-flex mt-5 xl:mt-0 w-full md:w-fit h-20 items-center justify-center gap-[8px]  px-24 py-15 relative   bg-black rounded-[16px] overflow-hidden">
-                                <div className="relative w-fit md:px-32 [font-family:'Mulish-Medium',Helvetica] font-medium text-white text-[30px] tracking-[0] leading-[normal]">
+                            <button onClick={handlePreOrder} className=" flex  mt-15 md:mt-5 xl:mt-0 w-full md:w-fit h-20 items-center justify-center gap-[8px]  px-24 py-15 relative   bg-black rounded-[16px] overflow-hidden">
+                                <div className="relative w-fit md:px-32 [font-family:'Mulish-Medium',Helvetica] font-medium text-white  text-xl md:text-2xl">
                                     Pre Order
                                 </div>
                             </button>
                         </>
                         ) : (
                             <>
-                                <button className="inline-flex w-full md:w-fit h-20 items-center justify-center gap-[8px] px-20 py-15 relative   bg-[#e0e4ef] rounded-[16px] overflow-hidden">
-                                    <div onClick={handleAddToCart} className="relative w-fit [font-family:'Mulish-Medium',Helvetica] font-medium text-black text-[30px] tracking-[0] leading-[normal]">
+                                <button className=" flex w-full md:w-fit h-20 items-center justify-center gap-[8px] px-20 py-15 relative   bg-[#e0e4ef] rounded-[16px] overflow-hidden">
+                                    <div onClick={handleAddToCart} className="relative w-fit [font-family:'Mulish-Medium',Helvetica] font-medium text-black text-xl md:text-2xl">
                                         Add to Cart
                                     </div>
                                 </button>
-                                <button onClick={handleBuyNow} className="inline-flex w-full md:w-fit h-20 items-center justify-center gap-[8px]  px-24 py-15 relative   bg-black rounded-[16px] overflow-hidden">
-                                    <div className="relative w-fit [font-family:'Mulish-Medium',Helvetica] font-medium text-white text-[30px] tracking-[0] leading-[normal]">
+                                <button onClick={handleBuyNow} className=" flex w-full md:w-fit h-20 items-center justify-center gap-[8px]  px-24 py-15 relative   bg-black rounded-[16px] overflow-hidden">
+                                    <div className="relative w-fit [font-family:'Mulish-Medium',Helvetica] font-medium text-white text-xl md:text-2xl">
                                         Buy Now
                                     </div>
                                 </button>
