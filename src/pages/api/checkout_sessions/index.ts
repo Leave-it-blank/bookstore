@@ -116,8 +116,8 @@ export default async function handler(req :NextApiRequest , res : NextApiRespons
         }],
         allow_promotion_codes: "false",
         mode: 'payment',
-        success_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/payment/success`,
-        cancel_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/payment/cancel`,
+        success_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/orders?event=success`,
+        cancel_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/orders?event=cancelled`,
         metadata: {
           orderID: orderID, // Set your metadata at the session level
         },

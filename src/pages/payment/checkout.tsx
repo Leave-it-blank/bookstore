@@ -186,7 +186,13 @@ const Checkout = () => {
     return (
         <>   <h1 className="text-2xl md:text-3xl  font-semibold mb-4"> Checkout Basket</h1>
 
+            <div className='bg-red-100 textred-500 p-5 md:p-6 rounded-md mb-3'>
+                Download link will only be available for 15 min after purchase. Please download the file as soon as possible.
+            </div>
+
             <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col  py-4">
+
+
 
                 {cart.length === 0 ? (
                     <p className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>Nothing to see.</p>

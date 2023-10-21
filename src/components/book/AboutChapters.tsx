@@ -159,7 +159,7 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
                         })
                     }
                 </div>
-
+                <br />
                 <Image src={Chapters[selectedChapter].imageUrl} width={400} height={500} alt={""} className="w-full h-40 self-center object-contain" />
             </div>
         </div >

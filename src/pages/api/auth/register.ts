@@ -44,7 +44,20 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     if(!user){
         return res.status(400).json({ error: 'User registration failed' });
     }
-    console.log(user)
+    const cart = await prisma.cart.findUnique({
+      where: {
+          userId: user?.id,
+      },
+  });
+ 
+  if(!cart){
+      const newcart = await prisma.cart.create({
+          data: {
+              userId: user.id,
+               
+          },
+      });
+  }
 
     res.status(200).json({ message: 'User registered successfully'  });
   } catch (error) {

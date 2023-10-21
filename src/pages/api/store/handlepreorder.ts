@@ -11,27 +11,28 @@ export default async function handler(
     }
     const data = req.body;
 
-
-    console.log(data);
+    if(!data){
+        return res.status(400).json({ error: 'Please add all the required fields.' })
+    }
     try {
         const preOrder = await prisma.PreOrder.create({
             data: {
-                firstName: data.userDetails.firstName,
-                lastName: data.userDetails.lastName,
-                email: data.userDetails.email,
-                phone: data.userDetails.phone,
-                address: data.userDetails.address,
-                city: data.userDetails.city,
-                state: data.userDetails.state,
-                zip: data.userDetails.zip,
-                country: data.userDetails.country,
-                itemID: data.form.itemID,
-                itemName: data.form.itemName,
-                itemType: data.form.itemType,
-                type: data.form.type,
+                firstName:  String(data.userDetails.firstName),
+                lastName:  String(data.userDetails.lastName),
+                email:  String(data.userDetails.email),
+                phone:  String(data.userDetails.phone),
+                address:  String(data.userDetails.address),
+                city:  String(data.userDetails.city),
+                state:  String(data.userDetails.state),
+                zip:  String(data.userDetails.zip),
+                country:  String(data.userDetails.country),
+                itemID:  String(data.form.itemID),
+                itemName:  String(data.form.itemName),
+                itemType:  String(data.form.itemType),
+                type:  String(data.form.type),
                 quantity: String(data.form.quantity),
-                price: data.form.price,
-                message: data.userDetails.message,
+                price:  String(data.form.price),
+                message:  String(data.userDetails.message),
 
             }
         } );

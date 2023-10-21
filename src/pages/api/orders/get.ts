@@ -20,28 +20,27 @@ export default async function handler(
         const { id } = authenticate;
 
        // console.log(req.body);
-        let orders = await prisma.Order.findUnique({
+        let orders = await prisma.Order.findMany({
             where: {
                 customerId: id,
             },
             include: {
                 items: {
                     include: {
-                        product: true,
-                        chapter: true,
-                    },
-               
+                        Product: true,
+                        Chapter: true,
+                    }
                 }
 
             },
         });
  
            //  console.log(cartItem);
-          return  res.status(200).json( {orders, message: "Succesfully Fetched Cart."} );
+          return  res.status(200).json( {orders: orders, message: "Succesfully Fetched Orders."} );
         }
         catch (err : any) {
             console.log(err);
-            return res.status(500).json( {error: "Unable to add item to cart."});
+            return res.status(500).json( {error: "Unable to fetch orders"  });
         }
  
     

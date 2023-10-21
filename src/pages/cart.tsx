@@ -15,7 +15,6 @@ interface cart {
 
 const Cart = () => {
     const { user, loading, token } = useUser();
-
     const router = useRouter();
     const [reload, setReload] = useState<boolean>(false);
     const [cart, setCart] = useState<any>([]);
@@ -83,13 +82,13 @@ const Cart = () => {
     };
     if (!user) {
         return <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col ">
-            <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Your Cart</h1>
+            <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Your Basket</h1>
             <p className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>You need to login first.</p>
         </div>
     }
     if (cartLoading) return (
         <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col">
-            <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Your Cart</h1>
+            <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Your Basket</h1>
             <div className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>
                 <div className="animate-spin rounded-full border-t-4 border-neutral-700 border-solid h-12 w-12 ">
 

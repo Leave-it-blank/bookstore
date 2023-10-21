@@ -1,7 +1,7 @@
 import ProcessingSpinner from '@/components/ProccessingSpinner'
 import React, { useState, useEffect } from 'react';
 
-export default function Cart({ key, item, removeItem }: { key: string, item: any, removeItem?: any }) {
+export default function Cart({ item, removeItem }: { item: any, removeItem?: any }) {
     const [processLoading, processLoadingSet] = useState<boolean>(false);
     return (
         <div

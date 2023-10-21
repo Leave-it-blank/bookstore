@@ -19,12 +19,13 @@ export default async function handler(
   const sig = req.headers['stripe-signature'] as string;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY;
   let event: Stripe.Event;
+ 
   try {
     if (!sig || !webhookSecret) return res.status(404).json({ error: ' Webhook Error: Missing signatures' });
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
     const paymentObj = event.data.object as Stripe.PaymentIntent;
     const orderId = paymentObj.metadata?.orderID;
-   // console.log(event);
+   console.log(event);
     switch (event.type) {
       //checkout.session.completed //payment_intent.succeeded
       case 'checkout.session.completed' :

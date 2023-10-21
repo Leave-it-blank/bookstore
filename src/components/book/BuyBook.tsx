@@ -198,10 +198,10 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
                         contentLabel="Full Screen Modal"
                         shouldCloseOnOverlayClick={true}
                         className="modal-content w-full   "
-                        overlayClassName="modal-overlay p-2 md:p-10 "
+                        overlayClassName="modal-overlay p-2 md:p-10  "
                     >
                         {/* @ts-ignore */}
-                        <div className="modal-body   relative">
+                        <div className="modal-body    relative ">
                             <FormComponent closeModal={closeModal} form={form} userDetails={userDetails} setUserDetails={setUserDetails} />
                         </div>
 
@@ -212,7 +212,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
             }
             <div className="flex flex-col items-start gap-[26px]  relative  ">
                 <div className="flex relative justify-center overflow-hidden w-80  -z-50 bg-[#f2f2f2] rounded-2xl sm:w-[409px] sm:min-h-[462px] items-start gap-[8px]  mt-[-1.00px] ml-[-1.00px] mr-[-1.00px] drop-shadow-sm shadow-[0px_4px_23px_#00000021]">
-                    <Image className=" relative rounded-2xl min-h-[460.3px] max-h-[460.6px] object-contain" alt="Image" src={thumbUrl[activeBookImageIndex]} width={383} height={450} />
+                    <Image priority className=" relative rounded-2xl min-h-[460.3px] max-h-[460.6px] object-contain" alt="Image" src={thumbUrl[activeBookImageIndex]} width={383} height={450} />
                 </div>
                 <div className=" flex items-start gap-[13px] relative flex-[0_0_auto]">
                     {

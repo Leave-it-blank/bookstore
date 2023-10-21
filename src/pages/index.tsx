@@ -10,12 +10,12 @@ export default function Home({ books, author }: any) {
           <h2 className="text-2xl md:text-3xl font-bold mb-4 ">Featured Books</h2>
           {
             books.map((book: any, index: number) => {
-              return (<section key={index} className="my-8">
+              return (<section key={index} className="my-8 md:pl-7">
 
 
-                <div className="flex flex-col md:flex-row   w-full gap-5">
+                <div className="flex flex-col md:flex-row gap-5 md:gap-20    w-full  ">
                   {/* Book 1 */}
-                  <div className="flex-shrink-0 self-center ">
+                  <div className="flex-col items-start gap-[16px] self-center md:self-auto flex-[0_0_auto]  flex  justify-center md:py-5 relative">
                     <Image
                       height={250}
                       width={200}
