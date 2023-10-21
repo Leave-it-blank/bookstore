@@ -50,6 +50,11 @@ export default function Orders() {
                 <div className="container">
                     <div className="">
                         <h1 className="text-start text-2xl md:text-3xl">My Orders</h1>
+                        <div className='bg-green-50 text-green-600 p-5 md:p-6 rounded-md my-3'>
+                            Download link will only be available for 15 min after purchase. Please download the file as soon as possible.
+                            <br />
+                            For any technical issues, please contact us at <a href="mailto:akgarg71@gmail.com" className='text-green-800'> akgarg71@gmail.com</a>
+                        </div>
                         <div className=" bg-white rounded-md p-3 md:p-5">
                             {
                                 orders.map((order, indx) => {
@@ -59,7 +64,7 @@ export default function Orders() {
 
                         </div>
                     </div>
-                </div>
+                </div >
             ) : (
                 <div className="container">
                     <div className="row">

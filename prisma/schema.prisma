@@ -41,6 +41,7 @@ model Chapter {
   Product      Product     @relation(fields: [productId], references: [id])
   CartItems    CartItems[]
   OrderItem    OrderItem[]
+  links        links[]
 
   @@index([productId], map: "Chapter_productId_fkey")
 }
@@ -67,6 +68,7 @@ model Order {
   status      OrderStatus
   total       Float
   customerId  Int
+  pay_url     String?     @db.MediumText
   customer    User        @relation(fields: [customerId], references: [id])
   items       OrderItem[]
 
@@ -80,6 +82,8 @@ model OrderItem {
   productId Int?
   chapterId Int?
   orderId   Int
+  link      String?
+  activedat DateTime @default(now())
   order     Order    @relation(fields: [orderId], references: [id])
   Product   Product? @relation(fields: [productId], references: [id])
   Chapter   Chapter? @relation(fields: [chapterId], references: [id])
@@ -104,6 +108,7 @@ model Product {
   Chapter       Chapter[]
   OrderItem     OrderItem[]
   CartItems     CartItems[]
+  links         links[]
 
   @@index([authorId], map: "Product_authorId_fkey")
 }
@@ -181,5 +186,16 @@ enum Product_category {
 model sessions {
   id      String @unique
   userId  Int
-  orderId Int 
+  orderId Int
+}
+
+model links {
+  id            Int      @id @unique @default(autoincrement())
+  productId     Int?     @unique
+  chapterNumber Float?   @unique
+  link          String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  Product       Product? @relation(fields: [productId], references: [id])
+  Chapter       Chapter? @relation(fields: [chapterNumber], references: [number])
 }

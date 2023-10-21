@@ -69,7 +69,7 @@ export default async function handler(req :NextApiRequest , res : NextApiRespons
       }else {
         total = total * 100;
       }
-      console.log(total);
+      
       let desc: String[] = [];
       getCart.CartItems.forEach((item : any) => {
         if(item.product){
@@ -84,7 +84,7 @@ export default async function handler(req :NextApiRequest , res : NextApiRespons
         return res.status(400).json({message: "Failed to create order request"});
       }
       // Now we Empty The cart
-      await prisma.cart.update({
+       await prisma.cart.update({
         where: {
           userId: auth.id
         },
@@ -123,16 +123,27 @@ export default async function handler(req :NextApiRequest , res : NextApiRespons
         },
       });
       //console.log(session);
- 
+      
 
     if (session) {
+      await prisma.order.update(
+        {
+          where: {
+            id: orderID
+          },
+          data: {
+           pay_url: session.url
+          }
+        }
+       )
       await prisma.sessions.create({
         data: {
           id: session.id,
           userId: auth.id,
-          orderId: orderID
+          orderId: orderID,
         }
       })
+       
       return res.status(200).json({ data: session  });
      
     } else {

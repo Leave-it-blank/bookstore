@@ -186,7 +186,7 @@ const Checkout = () => {
     return (
         <>   <h1 className="text-2xl md:text-3xl  font-semibold mb-4"> Checkout Basket</h1>
 
-            <div className='bg-red-100 textred-500 p-5 md:p-6 rounded-md mb-3'>
+            <div className='bg-red-100 text-red-500 p-5 md:p-6 rounded-md mb-3'>
                 Download link will only be available for 15 min after purchase. Please download the file as soon as possible.
             </div>
 

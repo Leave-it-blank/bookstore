@@ -40,6 +40,31 @@ async function proccessOrder(orderId: number){
 }
 async function completeOrder(orderId: number){
     // update order status to fullfilled
+
+     const getOrder = await prisma.order.findUnique({
+        where: {
+            id: orderId
+        },
+        include: {
+            items: true
+        }
+    });
+
+    const orderItems = getOrder?.items;
+    if(!orderItems) {return cancelOrder(orderId);}
+
+    await orderItems.forEach(async (item: any) => {
+        await prisma.OrderItem.update({
+            where: {
+                id: item.id
+            },
+            data: {
+                 link : "https://www.google.com"
+            }
+         })
+    }
+    )
+
     const order = await prisma.order.update({
         where: {
             id: orderId
@@ -64,31 +89,4 @@ async function cancelOrder(orderId: number){
 export { createOrder , proccessOrder, completeOrder, cancelOrder} ;
 
 
-
-// model Order {
-//     id          Int         @id @unique @default(autoincrement())
-//     orderNumber String      @unique
-//     createdAt   DateTime    @default(now())
-//     updatedAt   DateTime    @updatedAt
-//     status      OrderStatus
-//     total       Float
-//     customerId  Int
-//     customer    User        @relation(fields: [customerId], references: [id])
-//     items       OrderItem[]
-  
-//     @@index([customerId], map: "Order_customerId_fkey")
-//   }
-  
-//   model OrderItem {
-//     id        Int     @id @default(autoincrement())
-//     quantity  Int
-//     price     Float
-//     productId Int
-//     orderId   Int
-//     order     Order   @relation(fields: [orderId], references: [id])
-//     Product   Product @relation(fields: [productId], references: [id])
-  
-//     @@index([orderId], map: "OrderItem_orderId_fkey")
-//     @@index([productId], map: "OrderItem_productId_fkey")
-//   }
-  
+ 

@@ -23,12 +23,14 @@ export default async function handler(
         let orders = await prisma.Order.findMany({
             where: {
                 customerId: id,
-            },
+            },  
             include: {
+       
                 items: {
                     include: {
                         Product: true,
                         Chapter: true,
+                       
                     }
                 }
 

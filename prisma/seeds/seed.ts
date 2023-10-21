@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 async function main() {
   // ... you will write your Prisma Client queries here to insert data
- 
- 
+
+
 
   const author = await prisma.author.create({
     data: {
@@ -36,7 +36,7 @@ async function main() {
       each in automotive and consulting companies where he has been instrumental in the Strategic Sourcing and
       SCM functions to bring process and cost efficiency to his employers and clients ever since 1994.`,
       imageUrl: "/images/author.jpeg",
-      linkdInUrl: "",
+      linkdInUrl: "https://www.linkedin.com/company/s2p-pace/",
       // Other author fields
     },
   });
@@ -59,14 +59,23 @@ async function main() {
       priceDigital: 945,
       priceHardCopy: 1350,
       authorId: author.id,
+      links : {
+        createMany: {
+          data: [{
+            link: "https://drive.google.com/file/d/1IswFqmIwL3p-9c90Df9CFbGzTA0Pj7Z5/view?usp=sharing"
+              }]
+        }
+      },
       Chapter: {
         createMany: {
           data:  [
             {
               number: 0,
               price: 1,
+           
+                
           
-              category: "CHAPTER",
+            category: "CHAPTER",
             title: "Understanding Procurement as a Value Creation Function",
             imageUrl: "/images/ch/Chapter_0.png",
             heading: `How many of you think that Procurement is a thankless job? Well, irrespective of what you think, the reality is that it is not. On the contrary, it is one of the core functions just like Sales or Manufacturing…`,
@@ -391,6 +400,13 @@ async function main() {
       priceDigital: 920,
       priceHardCopy: 1150,
       authorId: author.id,
+      links : {
+        createMany: {
+          data: [{
+            link: "https://drive.google.com/file/d/1e0w41ZwHea_7apLkA2EaRwWU9CARGuDA/view?usp=share_link"
+              }]
+        }
+      },
       Chapter: {
         createMany: {
           data:   [
@@ -622,6 +638,109 @@ async function main() {
     },
   })
 
+  const chapterLinks = await prisma.links.createMany( 
+    {
+      data: [
+        {
+          link: "https://drive.google.com/file/d/1NelBZgebjNjnbq7JhKmvjq2Xn2XU2ORD/view?usp=share_link",
+          chapterNumber: 0,
+        },
+        {
+          link: "https://drive.google.com/file/d/18E8nyMrKAUYZc80kTaO598MJ5rYiFy7y/view?usp=share_link",
+          chapterNumber: 1,
+        },
+        {
+          link: "https://drive.google.com/file/d/1vSqM5OfVAL8_uKXmhMvCGM8u7L0fnX_y/view?usp=share_link",
+          chapterNumber: 2,
+        },
+        {
+          link: "https://drive.google.com/file/d/1_arzRKFpZj_G-6uaHuK_r-cUnK1K_wPw/view?usp=share_link",
+          chapterNumber: 3,
+        },
+        {
+          link: "https://drive.google.com/file/d/1uwSj_Nx69TbD7s-YxXUP3mqKpQaOIeco/view?usp=share_link",
+          chapterNumber: 4,
+        },
+        {
+          link: "https://drive.google.com/file/d/10UIt7AlpWOh0P5Ahu0HSCMAE4MbJarXM/view?usp=share_link",
+          chapterNumber: 5,
+        },
+        {
+          link: "https://drive.google.com/file/d/118wm3-TAZwKTgwn1YvcNCZDe_15IfGoj/view?usp=share_link",
+          chapterNumber: 6,
+        },
+        {
+          link:  "https://drive.google.com/file/d/1w8QbeorLBBtJPtMPmEQEDZqGogvdpSPn/view?usp=share_link",
+          chapterNumber: 7,
+        },
+        {
+          link: "https://drive.google.com/file/d/1_BqsP_lzaCo5H-Y7GVfiFS0jKrKZhJUC/view?usp=share_link",
+          chapterNumber: 8,
+        },
+        {
+          link: "https://drive.google.com/file/d/1PIQsquaSdFzj4dWVHw8D5Mh1LvdOtJP5/view?usp=share_link",
+          chapterNumber: 9,
+        },
+        {
+          link: "https://drive.google.com/file/d/137-HmJnaxrIUnG39vYkSBl4pbx4rK3gS/view?usp=share_link",
+          chapterNumber: 10,
+        },
+        {
+          link: "https://drive.google.com/file/d/1aI4iQe417GrHufWnR_ggdjJrJlV_pNE2/view?usp=share_link",
+          chapterNumber: 11,
+        },
+        {
+          link: "https://drive.google.com/file/d/18VWnkX_bM7-O8Xv3fQxPY_SQl0yMqRSS/view?usp=share_link",
+          chapterNumber: 12,
+        },
+        {
+          link: "https://drive.google.com/file/d/1oFsLTAPVg0W8-ydHAfkIufsyIcSybPrR/view?usp=share_link",
+          chapterNumber: 13,
+        },
+        {
+          link: "https://drive.google.com/file/d/1rXolAyP4kmK8CxDbW4EyhWeYFcBIeE6L/view?usp=share_link",
+          chapterNumber: 14,
+        },
+        {
+          link:"https://drive.google.com/file/d/1nT0UG95qCEItqAoeeAzq87AjhuDDuU--/view?usp=share_link",
+          chapterNumber: 15,
+        },
+        {
+          link:  "https://drive.google.com/file/d/1pdHZfLDEL6wGLZGo8pU4D2Q6W0HP_1--/view?usp=share_link",
+          chapterNumber: 16,
+        },
+        {
+          link: "https://drive.google.com/file/d/13PMAfZid0Sze2idQcHMMR-X6OxSYW1dm/view?usp=share_link",
+          chapterNumber: 17,
+        },   {
+          link: "https://drive.google.com/file/d/1DrJIASAIyJsjpXjY0xLLgqcNK6xFHsJc/view?usp=share_link",
+          chapterNumber: 18,
+        },
+        {
+          link: "https://drive.google.com/file/d/1AXzf4Z7wUHNOkb9Cq-NVjLOPX5rJUE0R/view?usp=share_link",
+          chapterNumber: 19,
+        },
+        {
+          link: "https://drive.google.com/file/d/1oF-PGqhmybWen1db2GHyWONsw6W76bJS/view?usp=share_link",
+          chapterNumber: 20,
+        },
+        {
+          link: "https://drive.google.com/file/d/1z8bu8t1Vf-W8ncI39Tq1kfXHK_qWpk6f/view?usp=share_link",
+          chapterNumber: 21,
+          
+        },
+           {
+          link:  "https://drive.google.com/file/d/10Q3ICMrQ2uahH3TbRb4UVUGlRJOq7ORC/view?usp=share_link",
+          chapterNumber: 22,
+        },
+        {
+          link:   "https://drive.google.com/file/d/1hC6VdzkLzKDL4VmIRwlghXlcmqwb9vry/view?usp=sharing",
+          chapterNumber: 23,
+        },
+      ],
+    }
+  
+  );
    
 }
 
