@@ -107,6 +107,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
             toast.error("Please login to continue")
             return;
         }
+        toast.success("Adding to cart")
         await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/cart/add`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
@@ -115,7 +116,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
         }).then(async (res) => {
             const data = await res.json();
             if (res.ok) {
-                toast.success("Added to cart")
+                toast.success("Successfully added to cart")
                 // router.push('/cart');
 
             } else {

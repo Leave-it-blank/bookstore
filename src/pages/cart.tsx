@@ -4,6 +4,8 @@ import toast from 'react-hot-toast';
 import { useUser } from '@/store/user';
 import { useRouter } from 'next/router';
 import CartItem from '@/components/cart/CartItem';
+import { PacmanLoader } from 'react-spinners'
+
 interface cart {
     itemID: number;
     itemName: string;
@@ -89,10 +91,12 @@ const Cart = () => {
     if (cartLoading) return (
         <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col">
             <h1 className="text-xl md:text-2xl  font-semibold mb-4"> Your Basket</h1>
-            <div className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>
-                <div className="animate-spin rounded-full border-t-4 border-neutral-700 border-solid h-12 w-12 ">
 
-                </div>
+            <div className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>
+                <PacmanLoader
+                    color="#eeeeee"
+                    size={30}
+                />
             </div>
 
         </div>

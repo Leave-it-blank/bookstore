@@ -23,45 +23,9 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
     const { user, token } = useUser();
     const router = useRouter();
 
-    // const chapterArray = Object.keys(Chapters).map((key: any) => {
-    //     return Chapters[key];
-    // });
 
-    // const [form, setForm] = useState({
-    //     itemID: Chapters[selectedChapter].number,
-    //     itemName: Chapters[selectedChapter].title,
-    //     itemType: 'chapter',
-    //     type: 'digital',
-    //     quantity: 1,
-    //     price: Chapters[selectedChapter].price,
-    // });
     const handleAddChapterToCart = async (e: any) => {
         e.preventDefault();
-        // addToCart(form);
-        // let cart = localStorage.getItem('cart');
-        // if (cart) {
-        //     let cartArray = JSON.parse(cart);
-        //     cartArray.push({
-        //         itemID: uuidv4() + Chapters[selectedChapter].number,
-        //         itemName: Chapters[selectedChapter].title,
-        //         itemType: 'chapter',
-        //         type: 'digital',
-        //         quantity: 1,
-        //         price: Chapters[selectedChapter].price,
-        //     });
-        //     localStorage.setItem('cart', JSON.stringify(cartArray));
-        // } else {
-        // let cartArray = [{
-        //     itemID: uuidv4() + Chapters[selectedChapter].number,
-        //     itemName: Chapters[selectedChapter].title,
-        //     itemType: 'chapter',
-        //     type: 'digital',
-        //     quantity: 1,
-        //     price: Chapters[selectedChapter].price,
-        // }];
-        //     localStorage.setItem('cart', JSON.stringify(cartArray));
-        // }
-        // toast.success('Added to cart');
 
         if (!user) {
             router.push('/login');
@@ -72,10 +36,10 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
             toast.error("Please login to continue")
             return;
         }
+        toast.success("Adding to cart")
         await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/cart/add`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-
             body: JSON.stringify({
                 itemType: 'CHAPTER',
                 type: 'digital',
@@ -85,9 +49,7 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
         }).then(async (res) => {
             const data = await res.json();
             if (res.ok) {
-                toast.success("Added to cart")
-                // router.push('/cart');
-
+                toast.success("Successfully added to cart")
             } else {
                 if (data.error) {
                     toast.error(data.error)
@@ -159,7 +121,7 @@ function ChaptersComponent({ Chapters }: { Chapters: chapters[] }) {
                         })
                     }
                 </div>
-                <br />
+                <br className="hidden md:block" />
                 <Image src={Chapters[selectedChapter].imageUrl} width={400} height={500} alt={""} className="w-full h-40 self-center object-contain" />
             </div>
         </div >

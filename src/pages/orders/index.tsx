@@ -4,14 +4,16 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import OrderItem from "@/components/order/OrderItem";
-
+import { PacmanLoader } from 'react-spinners'
 export default function Orders() {
     const { user, loading, token } = useUser();
     const [orders, setOrder] = useState([]);
+    const [myloading, setMyLoading] = useState<Boolean>(false);
     const router = useRouter();
 
     useEffect(() => {
         const fetchOrder = async () => {
+            setMyLoading(true);
             await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/orders/get`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
@@ -24,7 +26,7 @@ export default function Orders() {
                     if (data.error) {
                         toast.error(data.error)
                     }
-                }
+                } setMyLoading(false);
             }).catch((err) => {
                 console.log(err);
                 toast.error("Something went wrong. Please try again")
@@ -37,11 +39,17 @@ export default function Orders() {
     }, [token, user]);
 
     if (loading) {
-        return <LoadingSpinner />
+        return <PacmanLoader
+            color="#eeeeee"
+            size={30}
+        />
     }
 
     if (!user && loading) {
-        return <LoadingSpinner />;
+        return <PacmanLoader
+            color="#eeeeee"
+            size={30}
+        />;
     }
     if (!user) {
         // router.push('/login')
@@ -49,11 +57,24 @@ export default function Orders() {
             Login Required.
         </>
     }
+    if (myloading) {
+        return <div className="container mx-auto    rounded-lg flex justify-center flex-col">
+            <h1 className="text-start text-2xl md:text-3xl">My Orders</h1>
+
+            <div className='text-xl md:text-2xl  flex justify-center h-[400px] items-center'>
+                <PacmanLoader
+                    color="#eeeeee"
+                    size={30}
+                />
+            </div>
+
+        </div>
+    }
 
     return <>
         {
             orders.length > 0 ? (
-                <div className="container">
+                <div className="container mx-auto">
                     <div className="">
                         <h1 className="text-start text-2xl md:text-3xl">My Orders</h1>
                         <div className='bg-green-50 text-green-600 p-5 md:p-6 rounded-md my-3'>
