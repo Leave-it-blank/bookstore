@@ -22,13 +22,16 @@ export default async  function handler(
         if(!promo ){
             return res.status(400).json({ error: 'Invalid request' })
         }
-        
+
+        const regex = /[^a-zA-Z0-9]/g;
+        const promoCode = promo.replace(regex, '');
+       // console.log(promoCode)
 
         try {
                 const getPromo = await prisma.promo_codes.findUnique(
                     {
                         where: {
-                            code: promo.toLowerCase()
+                            code: String(promoCode.toLowerCase())
                         },
                     }
                 )
