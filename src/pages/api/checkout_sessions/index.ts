@@ -8,30 +8,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req :NextApiRequest , res : NextApiResponse) {
   if (req.method === 'POST') {
     const { cart } = req.body;
-
-    // const customer = await prisma.findUnique({
-    //   uuid: user?.id || '',
-    //   email: user?.email || ''
-    // });
-    // {
-    //   price_data : {
-    //     currency: 'inr',
-    //     product_data: {
-    //       'name': 'Insurance Plan',
-    //     },
-    //     'unit_amount': 4000, //need to set this dynamically
-    //   },
-    //   'quantity': 1,
-    // }, {
-    //   price_data : {
-    //     currency: 'inr',
-    //     product_data: {
-    //       'name': 'Helth Plan',
-    //     },
-    //     'unit_amount': 4000, //need to set this dynamically
-    //   },
-    //   'quantity': 2,
-    // }
     const auth  = await authenticated(req);
     if(!auth || (typeof auth === 'string')){
       return res.status(401).json({message: "Unauthorized"});

@@ -78,6 +78,13 @@ export default function OrderItem({ item, download }: { item: any, download?: an
                                 </div>
                             )
                         }
+                        {
+                            item.status == 'CANCELLED' && (
+                                <div className=''>
+                                    <a className=" text-lg font-semibold text-red-600  capitalize  "> ORDER CANNCELED</a>
+                                </div>
+                            )
+                        }
 
 
                     </div>

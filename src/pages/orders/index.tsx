@@ -39,10 +39,16 @@ export default function Orders() {
     if (loading) {
         return <LoadingSpinner />
     }
-    if (!user && !loading) {
-        return <>Please Login</>;
-    }
 
+    if (!user && loading) {
+        return <LoadingSpinner />;
+    }
+    if (!user) {
+        // router.push('/login')
+        return <>
+            Login Required.
+        </>
+    }
 
     return <>
         {

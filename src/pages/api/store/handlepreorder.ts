@@ -33,7 +33,6 @@ export default async function handler(
                 quantity: String(data.form.quantity),
                 price:  String(data.form.price),
                 message:  String(data.userDetails.message),
-
             }
         } );
        // console.log(preOrder);

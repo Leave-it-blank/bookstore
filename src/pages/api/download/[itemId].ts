@@ -39,19 +39,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 status: true,
             },
         });
-        console.log( item.orderId);
-
+        
         if(!order){
             console.log('Order not found for this user.')
             return res.status(400).json({ error: 'Order not found for this user.' });
         }
         if(order.status == "PROCESSING"){
-            console.log('Order no er.')
+           // console.log('Order no er.')
             return res.status(400).json({ error: 'Order pending completed.' });
         }
 
         if(order.status == "CREATED"){
-            console.log(' is user.')
+           // console.log(' is user.')
             return res.status(400).json({ error: 'Order not paid or completed.' });
         }
         if(!item.link){
@@ -68,7 +67,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
      //  return res.status(200).json({ itemId: itemId });
        // const zipFilePath = path.join(process.cwd(), 'books/Chapter_14.zip');
         const zipFilePath = path.join(process.cwd(), link);
-        console.log(zipFilePath)
+       // console.log(zipFilePath)
 
         // Check if the file exists
         if (fs.existsSync(zipFilePath)) {
@@ -86,7 +85,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           }
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).end('Internal Server Error');
+       return res.status(500).end('Internal Server Error');
     }
 };
 

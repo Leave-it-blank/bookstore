@@ -199,3 +199,12 @@ model links {
   Product       Product? @relation(fields: [productId], references: [id])
   Chapter       Chapter? @relation(fields: [chapterNumber], references: [number])
 }
+
+model promo_codes {
+  id          Int      @id @unique @default(autoincrement())
+  code        String   @unique
+  discount    Float    @default(0)
+  limit       Int      @default(10)
+  description String?  @db.MediumText
+  createdAt   DateTime @default(now())
+}

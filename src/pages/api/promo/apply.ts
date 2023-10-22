@@ -2,9 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/libs/prisma';
 import { authenticated } from '@/libs/auth';
-const promoList: String[] = ["earlybird"];
+import type { JwtPayload } from 'jsonwebtoken';
 
- 
 export default async  function handler(
     req: NextApiRequest,
     res: NextApiResponse
@@ -18,21 +17,34 @@ export default async  function handler(
             return res.status(401).json({ error: 'Not authenticated' })
         }
 
-        const {promo , cartId, token} = req.body;
+        const {promo} = req.body;
 
-        if(!promo || !promoList || !cartId || !token){
+        if(!promo ){
             return res.status(400).json({ error: 'Invalid request' })
         }
         
 
         try {
-            if(promoList.includes(promo.toLowerCase())){
+                const getPromo = await prisma.promo_codes.findUnique(
+                    {
+                        where: {
+                            code: promo.toLowerCase()
+                        },
+                    }
+                )
+                console.log(getPromo)
+                if (!getPromo) {
+                    return res.status(200).json({
+                        valid: false,
+                        error: "Invalid promo code"
+                    });
+                }
                 const cart = await prisma.cart.findUnique({
                     where: {
-                        id: cartId
+                        userId: (auth as JwtPayload).id // add type assertion here
                     },
                 })
-                if(!cart){
+                if (!cart) {
                     return res.status(400).json({ error: 'Invalid request' })
                 }
                 if(cart.total < 500){
@@ -40,25 +52,21 @@ export default async  function handler(
                 }
                 await prisma.cart.update({
                     where: {
-                        id: cartId
+                        userId: (auth as JwtPayload).id
                     },
                     data: {
-                        promo: promo,
-                        discount: 10
+                        promo: getPromo.code,
+                        discount: getPromo.discount
                     },
                 })
                 return res.status(200).json({
                     valid: true,
                     message: "Successfully applied promotion code",
                 });
-            }else {
-                return res.status(200).json({
-                    valid: false,
-                    error: "Invalid promo code"
-                });
-            }
+         
         }
         catch (err : any) {
+            console.log(err);
             return res.status(500).json( {error: "Invalid promo code"});
         }
  
