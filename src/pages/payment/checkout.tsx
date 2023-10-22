@@ -68,13 +68,14 @@ const Checkout = () => {
         await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/promo/apply`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify({ promo, cartId: cart.id, token: token }),
+            body: JSON.stringify({ promo }),
         }).then(async (res) => {
             const data = await res.json();
             if (res.ok) {
                 if (data.valid) {
 
                     toast.success(data.message)
+                    setPromoError("")
                     setReload(!reload)
                 } else {
                     setPromoError(data.error)

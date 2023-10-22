@@ -55,11 +55,14 @@ async function completeOrder(orderId: number){
     });
 
     const orderItems = getOrder?.items;
-    if(!orderItems) {return cancelOrder(orderId);}
+    //console.log(orderItems)
+    if(!orderItems) {
+        console.log("Order canncelled due to items not found.")
+        return cancelOrder(orderId);
+    }
 
-    await orderItems.forEach(async (item: any) => {
+    for (const item of orderItems) {
         let link ;
-
         if(item.productId){
             link = await prisma.links.findUnique({
                 where: {
@@ -67,14 +70,20 @@ async function completeOrder(orderId: number){
                 },
             
             })
-        }else {
+        } 
+        if(item.chapterId) {
+            console.log(item.Chapter.number)
             link = await prisma.links.findUnique({
                 where: {
                     chapterNumber: item.Chapter.number,
                 },
             })
+            console.log(link)
         }
-        if(!link) {return cancelOrder(orderId);}
+        if(!link) {
+            console.log("Order canncelled due to link not found.")
+            return cancelOrder(orderId);
+        }
         const currentTime = new Date();
         // Add 30 minutes to the current time
         const futureTime = new Date(currentTime.getTime() + 20 * 60000); // 30 minutes = 30 * 60,000 milliseconds
@@ -88,7 +97,7 @@ async function completeOrder(orderId: number){
             }
          })
     }
-    )
+    
 
     const order = await prisma.order.update({
         where: {
