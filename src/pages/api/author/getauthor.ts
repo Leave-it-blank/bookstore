@@ -1,12 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import prisma from '@/libs/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-import {  author } from '../../../data';
+ 
 
 type Data = {
     name: string
 }
-export default function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -14,6 +14,11 @@ export default function handler(
         return res.status(405).json({ error: 'Method not allowed' })
     }
    // console.log(author)
+   const author = await prisma.author.findUnique({
+    where: {
+       name: "Ajay Garg"
+    },
+   })
   
 
     if (!author) {

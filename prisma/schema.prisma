@@ -48,7 +48,7 @@ model Chapter {
 
 model Author {
   id         Int      @id @unique @default(autoincrement())
-  name       String
+  name       String   @unique
   jobTitle   String   @db.MediumText
   degree     String   @db.MediumText
   college    String   @db.MediumText
