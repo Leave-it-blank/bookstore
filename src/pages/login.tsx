@@ -30,7 +30,7 @@ const Login: React.FC = () => {
                 UserContext.getuser();
                 //  getuser();
                 // window.location.href = '/';
-                Router.push('/');
+                Router.back();
             } else {
                 if (data.error) {
                     setErrors([data.error]);
@@ -47,9 +47,9 @@ const Login: React.FC = () => {
     };
     useEffect(() => {
         if (UserContext.user != null) {
-            window.location.href = "/";
+            Router.back();
         }
-    }, [UserContext]);
+    }, [UserContext, Router]);
 
     return (
         <div className=" min-h-[450px] md:min-h-[700px] flex items-center justify-center bg-gray-50">

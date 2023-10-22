@@ -2,14 +2,22 @@ import { useUser } from '@/store/user';
 import React, { Key, useState } from 'react';
 import LoadingSpinner from '@/components/LoadingSpinner'
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 export default function Profile() {
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
     const [errors, setErrors] = useState<any>([]);
-    const { user, token } = useUser();
-    if (!user) {
+    const router = useRouter();
+    const { user, token, loading } = useUser();
+    if (!user && loading) {
         return <LoadingSpinner />;
+    }
+    if (!user) {
+        router.push('/login')
+        return <>
+            Login Required.
+        </>
     }
     const validate = async () => {
         if (password == "" || newPassword == "") {

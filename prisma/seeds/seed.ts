@@ -62,7 +62,7 @@ async function main() {
       links : {
         createMany: {
           data: [{
-            link: "https://drive.google.com/file/d/1IswFqmIwL3p-9c90Df9CFbGzTA0Pj7Z5/view?usp=sharing"
+            link: "books/Book_1.zip"
               }]
         }
       },
@@ -403,7 +403,7 @@ async function main() {
       links : {
         createMany: {
           data: [{
-            link: "https://drive.google.com/file/d/1e0w41ZwHea_7apLkA2EaRwWU9CARGuDA/view?usp=share_link"
+            link:  "books/Book_2.zip"
               }]
         }
       },
@@ -642,99 +642,99 @@ async function main() {
     {
       data: [
         {
-          link: "https://drive.google.com/file/d/1NelBZgebjNjnbq7JhKmvjq2Xn2XU2ORD/view?usp=share_link",
+          link:  "books/Chapter_0.zip",
           chapterNumber: 0,
         },
         {
-          link: "https://drive.google.com/file/d/18E8nyMrKAUYZc80kTaO598MJ5rYiFy7y/view?usp=share_link",
+          link:  "books/Chapter_1.zip",
           chapterNumber: 1,
         },
         {
-          link: "https://drive.google.com/file/d/1vSqM5OfVAL8_uKXmhMvCGM8u7L0fnX_y/view?usp=share_link",
+          link:  "books/Chapter_2.zip",
           chapterNumber: 2,
         },
         {
-          link: "https://drive.google.com/file/d/1_arzRKFpZj_G-6uaHuK_r-cUnK1K_wPw/view?usp=share_link",
+          link:  "books/Chapter_3.zip",
           chapterNumber: 3,
         },
         {
-          link: "https://drive.google.com/file/d/1uwSj_Nx69TbD7s-YxXUP3mqKpQaOIeco/view?usp=share_link",
+          link:  "books/Chapter_4.zip",
           chapterNumber: 4,
         },
         {
-          link: "https://drive.google.com/file/d/10UIt7AlpWOh0P5Ahu0HSCMAE4MbJarXM/view?usp=share_link",
+          link:  "books/Chapter_5.zip",
           chapterNumber: 5,
         },
         {
-          link: "https://drive.google.com/file/d/118wm3-TAZwKTgwn1YvcNCZDe_15IfGoj/view?usp=share_link",
+          link:  "books/Chapter_6.zip",
           chapterNumber: 6,
         },
         {
-          link:  "https://drive.google.com/file/d/1w8QbeorLBBtJPtMPmEQEDZqGogvdpSPn/view?usp=share_link",
+          link:  "books/Chapter_7.zip",
           chapterNumber: 7,
         },
         {
-          link: "https://drive.google.com/file/d/1_BqsP_lzaCo5H-Y7GVfiFS0jKrKZhJUC/view?usp=share_link",
+          link:  "books/Chapter_8.zip",
           chapterNumber: 8,
         },
         {
-          link: "https://drive.google.com/file/d/1PIQsquaSdFzj4dWVHw8D5Mh1LvdOtJP5/view?usp=share_link",
+          link:  "books/Chapter_9.zip",
           chapterNumber: 9,
         },
         {
-          link: "https://drive.google.com/file/d/137-HmJnaxrIUnG39vYkSBl4pbx4rK3gS/view?usp=share_link",
+          link:  "books/Chapter_10.zip",
           chapterNumber: 10,
         },
         {
-          link: "https://drive.google.com/file/d/1aI4iQe417GrHufWnR_ggdjJrJlV_pNE2/view?usp=share_link",
+          link:  "books/Chapter_11.zip",
           chapterNumber: 11,
         },
         {
-          link: "https://drive.google.com/file/d/18VWnkX_bM7-O8Xv3fQxPY_SQl0yMqRSS/view?usp=share_link",
+          link:  "books/Chapter_12.zip",
           chapterNumber: 12,
         },
         {
-          link: "https://drive.google.com/file/d/1oFsLTAPVg0W8-ydHAfkIufsyIcSybPrR/view?usp=share_link",
+          link:  "books/Chapter_13.zip",
           chapterNumber: 13,
         },
         {
-          link: "https://drive.google.com/file/d/1rXolAyP4kmK8CxDbW4EyhWeYFcBIeE6L/view?usp=share_link",
+          link: "books/Chapter_14.zip",
           chapterNumber: 14,
         },
         {
-          link:"https://drive.google.com/file/d/1nT0UG95qCEItqAoeeAzq87AjhuDDuU--/view?usp=share_link",
+          link:  "books/Chapter_15.zip",
           chapterNumber: 15,
         },
         {
-          link:  "https://drive.google.com/file/d/1pdHZfLDEL6wGLZGo8pU4D2Q6W0HP_1--/view?usp=share_link",
+          link:  "books/Chapter_16.zip",
           chapterNumber: 16,
         },
         {
-          link: "https://drive.google.com/file/d/13PMAfZid0Sze2idQcHMMR-X6OxSYW1dm/view?usp=share_link",
+          link:  "books/Chapter_17.zip",
           chapterNumber: 17,
         },   {
-          link: "https://drive.google.com/file/d/1DrJIASAIyJsjpXjY0xLLgqcNK6xFHsJc/view?usp=share_link",
+          link:  "books/Chapter_18.zip",
           chapterNumber: 18,
         },
         {
-          link: "https://drive.google.com/file/d/1AXzf4Z7wUHNOkb9Cq-NVjLOPX5rJUE0R/view?usp=share_link",
+          link:  "books/Chapter_19.zip",
           chapterNumber: 19,
         },
         {
-          link: "https://drive.google.com/file/d/1oF-PGqhmybWen1db2GHyWONsw6W76bJS/view?usp=share_link",
+          link:  "books/Chapter_20.zip",
           chapterNumber: 20,
         },
         {
-          link: "https://drive.google.com/file/d/1z8bu8t1Vf-W8ncI39Tq1kfXHK_qWpk6f/view?usp=share_link",
+          link:  "books/Chapter_21.zip",
           chapterNumber: 21,
           
         },
            {
-          link:  "https://drive.google.com/file/d/10Q3ICMrQ2uahH3TbRb4UVUGlRJOq7ORC/view?usp=share_link",
+          link:  "books/Chapter_22.zip",
           chapterNumber: 22,
         },
         {
-          link:   "https://drive.google.com/file/d/1hC6VdzkLzKDL4VmIRwlghXlcmqwb9vry/view?usp=sharing",
+          link:   "books/Chapter_23.zip",
           chapterNumber: 23,
         },
       ],

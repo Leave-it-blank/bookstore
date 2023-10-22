@@ -46,7 +46,11 @@ async function completeOrder(orderId: number){
             id: orderId
         },
         include: {
-            items: true
+            items:  {
+                include : {
+                    Chapter: true
+                }
+            }
         }
     });
 
@@ -54,12 +58,33 @@ async function completeOrder(orderId: number){
     if(!orderItems) {return cancelOrder(orderId);}
 
     await orderItems.forEach(async (item: any) => {
+        let link ;
+
+        if(item.productId){
+            link = await prisma.links.findUnique({
+                where: {
+                    productId: item.productId,
+                },
+            
+            })
+        }else {
+            link = await prisma.links.findUnique({
+                where: {
+                    chapterNumber: item.Chapter.number,
+                },
+            })
+        }
+        if(!link) {return cancelOrder(orderId);}
+        const currentTime = new Date();
+        // Add 30 minutes to the current time
+        const futureTime = new Date(currentTime.getTime() + 20 * 60000); // 30 minutes = 30 * 60,000 milliseconds
         await prisma.OrderItem.update({
             where: {
                 id: item.id
             },
             data: {
-                 link : "https://www.google.com"
+                 link : link.link,
+                 activedate: futureTime
             }
          })
     }

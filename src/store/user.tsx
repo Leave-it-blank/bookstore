@@ -1,17 +1,3 @@
-// // CurrentUserContext.tsx
-// import React, { createContext, useState, useContext } from 'react';
-
-// type UserContextType = {
-//   user: any; // Define the type for user here
-//   setUser: React.Dispatch<any>;
-// };
-// const CurrentUserContext = createContext<UserContextType >({
-//   user: null,
-//   setUser: () => null,
-// });
-
-
-// export default CurrentUserContext;
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {

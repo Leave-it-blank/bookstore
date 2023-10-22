@@ -6,6 +6,7 @@ import { useUser } from '@/store/user';
 import { useRouter } from 'next/router';
 import { loadStripe } from '@stripe/stripe-js';
 import CartItem from '@/components/cart/CartItem';
+import ProcessingSpinner from '@/components/ProccessingSpinner';
 const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ? loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ) : null;
@@ -25,6 +26,7 @@ const Checkout = () => {
     const [cart, setCart] = useState<any>([]);
     const [cartLoading, setCartLoading] = useState<boolean>(true);
     const [promo, setPromo] = useState("");
+    const [proccessLoading, setProccessLoading] = useState<boolean>(false);
 
     const [promoError, setPromoError] = useState("");
     useEffect(() => {
@@ -130,14 +132,13 @@ const Checkout = () => {
     }
 
     const handleCheckout = async () => {
+        setProccessLoading(true);
         try {
             const stripe = await stripePromise;
             if (!stripe) {
                 return;
             }
-
             await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/checkout_sessions`, {
-
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ cart: cart, token: token }),
@@ -148,20 +149,22 @@ const Checkout = () => {
                         sessionId: checkoutSession.data.id,
                     });
                     if (result.error) {
+                        setProccessLoading(false);
                         toast.error(result.error.message || "Error redirecting to checkout")
                     }
                 } else {
+                    setProccessLoading(false);
                     toast.error("Something went wrong. Please try again")
 
                 }
             }).catch((err) => {
                 console.log(err);
+                setProccessLoading(false);
                 toast.error("Something went wrong. Please try again")
             });
-
-
         } catch (error) {
             console.log(error);
+            setProccessLoading(false);
         }
     };
 
@@ -263,9 +266,15 @@ const Checkout = () => {
                                 </div>
 
                                 <div className='w-full flex justify-center'>
-                                    <button onClick={handleCheckout} className="inline-flex w-full text-white md:w-fit  items-center justify-center   px-20 py-4 relative   bg-black rounded-[16px] overflow-hidden">
-                                        Pay Now
-                                    </button>
+                                    {
+                                        proccessLoading ? <div className="inline-flex w-full text-white md:w-fit  items-center justify-center   px-20 py-4 relative   bg-black rounded-[16px] overflow-hidden">
+                                            <ProcessingSpinner color='white' loading={proccessLoading} />
+                                        </div> :
+                                            <button onClick={handleCheckout} className="inline-flex w-full text-white md:w-fit  items-center justify-center   px-20 py-4 relative   bg-black rounded-[16px] overflow-hidden">
+                                                Pay Now
+                                            </button>
+                                    }
+
                                 </div>
                             </div>
                         )}

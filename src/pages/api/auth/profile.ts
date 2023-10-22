@@ -27,9 +27,6 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
                 user: user
             });
         });
-        
-    
-    
 
     res.status(400).json({ token: "" , refreshToken: "" , message: 'Token Expired.'   });
   } catch (error) {
