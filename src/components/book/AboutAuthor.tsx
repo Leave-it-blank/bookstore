@@ -15,8 +15,7 @@ interface AuthorProps {
 
 export const Author = ({ Author }: { Author: AuthorProps }): JSX.Element => {
 
-    console.log(`Author:  }`);
-    console.log(Author)
+
     return (
         <div className="flex  flex-col items-start gap-5 relative">
             <div className="relative w-fit mt-[-1.00px]  font-bold text-black  text-2xl md:text-3xl  tracking-[0] leading-[normal]">
