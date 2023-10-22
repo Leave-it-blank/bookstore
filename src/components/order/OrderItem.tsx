@@ -81,7 +81,14 @@ export default function OrderItem({ item, download }: { item: any, download?: an
                         {
                             item.status == 'CANCELLED' && (
                                 <div className=''>
-                                    <a className=" text-lg font-semibold text-red-600  capitalize  "> ORDER CANNCELED</a>
+                                    <span className=" text-lg font-semibold text-red-600  capitalize  "> ORDER CANNCELED</span>
+                                </div>
+                            )
+                        }
+                        {
+                            item.status == 'PROCESSING' && (
+                                <div className=''>
+                                    <span className=" text-lg font-semibold text-red-600  capitalize  ">  Generating Links </span>
                                 </div>
                             )
                         }

@@ -40,7 +40,7 @@ async function proccessOrder(orderId: number){
 }
 async function completeOrder(orderId: number){
     // update order status to fullfilled
-
+     await proccessOrder(orderId);
      const getOrder = await prisma.order.findUnique({
         where: {
             id: orderId
