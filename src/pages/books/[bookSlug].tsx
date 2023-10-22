@@ -5,6 +5,9 @@ import BuyBook from "@/components/book/BuyBook";
 import { getBookBySlug } from "@/utils/api";
 
 export default function mybook({ bookData }: any) {
+    // console.log(bookData)
+    if (!bookData) return;
+
     const { book, chapters, author } = bookData;
     //  console.log(chapters)
     return <>
@@ -20,7 +23,13 @@ export default function mybook({ bookData }: any) {
 
 export async function getStaticProps({ params }: any) {
     const { bookSlug } = params;
-    const bookData = await getBookBySlug(bookSlug);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/books/${bookSlug}`);
+    const bookData = await res.json();
+    if (!res.ok) {
+        return {
+            notFound: true,
+        }
+    }
     return {
         props: {
             bookData
@@ -37,6 +46,6 @@ export async function getStaticPaths() {
     }];
     return {
         paths,
-        fallback: false
+        fallback: true
     }
 }

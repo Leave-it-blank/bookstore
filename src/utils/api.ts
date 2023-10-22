@@ -4,7 +4,7 @@ export async function getBookBySlug(bookSlug : string){
     const data = await res.json();
     if(res.status !== 200 && data.error.length > 0){
         console.error(res.statusText);
-        throw new Error('Failed to fetch API');
+        
     }
     return data;
     
