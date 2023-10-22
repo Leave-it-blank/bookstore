@@ -21,31 +21,14 @@ export default function mybook({ bookData }: any) {
     </>
 }
 
-export async function getStaticProps({ params }: any) {
+export async function getServerSideProps({ params }: any) {
     const { bookSlug } = params;
     const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/books/${bookSlug}`);
     const bookData = await res.json();
-    if (!res.ok) {
-        return {
-            notFound: true,
-        }
-    }
+
     return {
         props: {
             bookData
         }
-    }
-}
-
-export async function getStaticPaths() {
-    // const booksData = await getBooks();
-    const paths = [{
-        params: { bookSlug: "fundamentals-of-sourcing-and-procurement-part-one" }
-    }, {
-        params: { bookSlug: "fundamentals-of-sourcing-and-procurement-part-two" }
-    }];
-    return {
-        paths,
-        fallback: true
     }
 }

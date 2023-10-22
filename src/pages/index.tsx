@@ -54,7 +54,7 @@ export default function Home({ books, author }: any) {
 }
 
 
-export const getStaticProps = (async (context: any) => {
+export const getServerSideProps = (async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/books/getbooks`)
   const books = await res.json()
   const authorRes = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/author/getauthor`)
