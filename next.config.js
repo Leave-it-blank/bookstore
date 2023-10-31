@@ -13,6 +13,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "source2procure.shop",
       },
+      {
+        protocol: "https",
+        hostname: "bookstore.leaveitblank.co",
+      },
+      {
+        protocol: "http",
+        hostname:  "bookstore.leaveitblank.co",
+      },
+      {
+        protocol: "https",
+        hostname:  "*.leaveitblank.co",
+      },
     ],
   },
  
