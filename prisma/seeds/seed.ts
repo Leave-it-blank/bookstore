@@ -7,20 +7,6 @@ async function main() {
 
   const author = await prisma.author.create({
     data: {
-      // Provide author details here
-      // For example:
-      // id         Int       @id @unique @default(autoincrement())
-      // name       String
-      // jobTitle   String
-      // degree     String
-      // college    String
-      // city       String
-      // about      String
-      // imageUrl   String
-      // linkdInUrl String
-      // createdAt  DateTime  @default(now())
-      // updatedAt  DateTime  @updatedAt
-      // Product    Product[]
       id: 1,
       name: "Ajay Garg",
       jobTitle: "Sourcing & SCM Expert",
@@ -35,8 +21,8 @@ async function main() {
       possesses an overall experience of 28+ years with a very unique mix of finely balanced tenure of 14 years
       each in automotive and consulting companies where he has been instrumental in the Strategic Sourcing and
       SCM functions to bring process and cost efficiency to his employers and clients ever since 1994.`,
-      imageUrl: "/images/author.jpeg",
-      linkdInUrl: "https://www.linkedin.com/company/s2p-pace/",
+      imageUrl: "/static/author.jpeg",
+      linkdInUrl: "https://www.linkedin.com/in/ajay-garg-s2p-pace/",
       // Other author fields
     },
   });
@@ -52,7 +38,7 @@ async function main() {
       You will find every page of the book adding to your knowledge as you progress logically, reading chapter after chapter. You would also find the aesthetics pleasing to the eye as if you are going through a storyline in a presentation style.
       Part 1 of the book especially showcase all that you need from Spend Management, negotiations through Contracting and Inventory Management.
       The uniqueness of the book is evident from the macro-enabled spreadsheets and templates provided along with the chapters to make it more practical to apply in your daily work.`,
-      thumbUrl: "[\"/images/book_part1_bg.png\", \"/images/book_part1_2.jpeg\"]",
+      thumbUrl: "[\"/static/book_part1_bg.png\", \"/static/book_part1_2.jpeg\"]",
       createdAt: new Date(),
       updatedAt: new Date(),
       rating: 5,
@@ -72,12 +58,9 @@ async function main() {
             {
               number: 0,
               price: 1,
-           
-                
-          
             category: "CHAPTER",
             title: "Understanding Procurement as a Value Creation Function",
-            imageUrl: "/images/ch/Chapter_0.png",
+            imageUrl: "/static/ch/Chapter_0.png",
             heading: `How many of you think that Procurement is a thankless job? Well, irrespective of what you think, the reality is that it is not. On the contrary, it is one of the core functions just like Sales or Manufacturing…`,
             introduction: JSON.stringify([
               "Procurement Function started getting into the limelight only in the past about 12-13 years, and before that, it was not even thought of as a proactive career option. The young graduates used to find themselves doing procurement by virtue of the organization's need and not by the career choice of the individual",
@@ -95,7 +78,7 @@ async function main() {
           {
             number: 1,
             title: "Spend Diagnostic and Solution Identification",
-            imageUrl: "/images/ch/Chapter_1.png",
+            imageUrl: "/static/ch/Chapter_1.png",
             price: 99,
             category: "CHAPTER",
             heading:
@@ -121,7 +104,7 @@ async function main() {
             price: 99,
             category: "CHAPTER",
             title: "Project Assessment and Data Collection",
-            imageUrl: "/images/ch/Chapter_2.png",
+            imageUrl: "/static/ch/Chapter_2.png",
             heading:
               "The assessment helps to prepare for success by systematic evaluation of project’s boundary conditions",
             introduction: JSON.stringify([
@@ -143,7 +126,7 @@ async function main() {
             price: 149,
             category: "CHAPTER",
             title: "RFI and RFQ Management",
-            imageUrl: "/images/ch/Chapter_3.png",
+            imageUrl: "/static/ch/Chapter_3.png",
             heading: "The Art of RFx Management in Procurement",
             introduction: JSON.stringify([
               "Request for Information (RFI) and Request for Quotation (RFQ) are the standard procedures used to collect the relevant data to invite and engage with the suppliers in a structured way. An RFI usually precedes the RFQ but not always, depending upon the nature of the category and the target supply base and their known availability and performance in the market",
@@ -165,7 +148,7 @@ async function main() {
             price: 99,
             category: "CHAPTER",
             title: "Sourcing Strategy and Approach",
-            imageUrl: "/images/ch/Chapter_4.png",
+            imageUrl: "/static/ch/Chapter_4.png",
             heading: "It starts with the category understanding; to become an expert first and then build the strategy!!",
             introduction: JSON.stringify([
               "The success of any procurement function depends on many factors and the most important one is the choice of sourcing strategy and its implementation",
@@ -186,7 +169,7 @@ async function main() {
             price: 99,
             category: "CHAPTER",
             title: "Supplier Market Assessment",
-            imageUrl: "/images/ch/Chapter_5.png",
+            imageUrl: "/static/ch/Chapter_5.png",
             heading: "It starts with the category understanding; to become an expert first and then build the strategy!!",
             introduction: JSON.stringify([
               "Understanding the supplier market is one of the crucial steps before proceeding with any sourcing project. A thorough supplier market assessment helps in making informed decisions about the sourcing strategy and supplier selection.",
@@ -207,7 +190,7 @@ async function main() {
             price: 99,
             category: "CHAPTER",
             title: "Cost Modeling",
-            imageUrl: "/images/ch/Chapter_6.png",
+            imageUrl: "/static/ch/Chapter_6.png",
             heading: "A Guide to Understanding and Applying Cost Models in Procurement",
             introduction: JSON.stringify([
               "Cost modeling is a valuable tool in procurement that helps organizations understand and analyze the cost structure of goods and services. By creating cost models, procurement professionals can gain insights into the cost drivers, assess supplier proposals, and make informed decisions that lead to cost savings.",
@@ -226,7 +209,7 @@ async function main() {
             price: 49,
             category: "CHAPTER",
             title: "Supplier Evaluation and Selection",
-            imageUrl: "/images/ch/Chapter_7.png",
+            imageUrl: "/static/ch/Chapter_7.png",
             heading: "Choosing the Right Suppliers for Your Sourcing Project",
             introduction: JSON.stringify([
               "Supplier evaluation and selection are critical steps in the sourcing process. Making the right choices when it comes to suppliers can significantly impact the success of your sourcing project and the overall performance of your organization.",
@@ -245,7 +228,7 @@ async function main() {
             price: 99,
             category: "CHAPTER",
             title: "Cost Structure and Cost Driver Analysis",
-            imageUrl: "/images/ch/Chapter_8.png",
+            imageUrl: "/static/ch/Chapter_8.png",
             heading: "Understanding the Difference and Importance",
             introduction: JSON.stringify([
               "Cost Structure and Cost Driver analysis are two of the important characteristics in establishing the applicability of sourcing strategy to any category. It is extremely important therefore for a procurement manager to understand -",
@@ -270,7 +253,7 @@ async function main() {
             price: 149,
             category: "CHAPTER",
             title: "Negotiation Strategy",
-            imageUrl: "/images/ch/Chapter_9.png",
+            imageUrl: "/static/ch/Chapter_9.png",
             heading:   
               "The Bible of a Procurement Professional. Preparation Keeps You Ahead of the Curve", 
             introduction: JSON.stringify([
@@ -293,7 +276,7 @@ async function main() {
             price: 99,
             category: "CHAPTER",
             title: "Supplier Site Assessment",
-            imageUrl: "/images/ch/Chapter_10.png",
+            imageUrl: "/static/ch/Chapter_10.png",
             heading: "",
             introduction: JSON.stringify([
               "Supplier Site Assessment (SSA) is one of the most important aspects while making a final award decision in favor of any supplier. There are essentially two schools of thought here –",
@@ -316,7 +299,7 @@ async function main() {
             price: 149,
             category: "CHAPTER",
             title: "Business Award and Contracting",
-            imageUrl: "/images/ch/Chapter_11.png",
+            imageUrl: "/static/ch/Chapter_11.png",
             heading: "- One of the Equally Important and Crucial Final Steps in the 9-Step Sourcing Process, Business Award Communicated Formally Followed by a Transparent Contract Always Go a Long Way to Bank the Benefits of the Sourcing Process.",
             introduction: JSON.stringify([
               "Communication of Business Award to the most suited supplier(s) is considered the important step to not only build rapport but also cement the business relationship that is committed both ways",
@@ -338,7 +321,7 @@ async function main() {
             price: 99,
             category: "CHAPTER",
             title: "Supplier Performance Management",
-            imageUrl: "/images/ch/Chapter_12.png",
+            imageUrl: "/static/ch/Chapter_12.png",
             heading: "- Supplier Performance Management (SPM) Is Way Beyond the Ratings on Quality, Cost, and Delivery Only and Covers a 360-Degree View to Rate Performance",
             introduction: JSON.stringify([
               "Supplier Performance Management (SPM) is one of the most important aspects of any Purchasing and/or Supply Chain function. Suppliers not only enrich your repute but also impact your cash flow through various indices that we shall discuss and learn during this course",
@@ -359,7 +342,7 @@ async function main() {
             price: 99,
             category: "CHAPTER",
             title: "Inventory Management",
-            imageUrl: "/images/ch/Chapter_13.png",
+            imageUrl: "/static/ch/Chapter_13.png",
             heading: "Understanding the Methodology and Importance",
             introduction: JSON.stringify([
               "Inventory Management refers to the process of ordering, storing, and using purchased and finished products",
@@ -393,7 +376,7 @@ async function main() {
       If you are in middle management role and want to gallop fast to the senior levels, do not miss out on Part 2. I can almost certainly claim that it would add immense value to your knowledge and skills.
       Please soak yourself in the colour of my QTs (Cuties) as another unique feature added after every two chapters to give you a little extra as bonus. Finally, do not miss out on the Appendix Section given at the end of Part 2, that would bring more comprehensive coverage to make the recipe of Procurement more pleasing to the palette.
       Happy Learning !!!`,
-      thumbUrl: "[\"/images/book_part2.png\", \"/images/book_part_2_1.png\"]",
+      thumbUrl: "[\"/static/book_part2.png\", \"/static/book_part_2_1.png\"]",
       createdAt: new Date(),
       updatedAt: new Date(),
       rating: 5,
@@ -415,7 +398,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Sourcing Levers & Sourcing Strategies",
-              imageUrl: "/images/ch/Chapter_14.png",
+              imageUrl: "/static/ch/Chapter_14.png",
               heading: "...A cutting-edge understanding to achieve Cost Saving Objectives",
               introduction: JSON.stringify([
                 "Sourcing is a complex process, and the objectives to undertake a sourcing activity may vary. With varying objectives, it is extremely important to select sourcing levers most suited to achieve the objective.",
@@ -435,7 +418,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Auction Strategies and Preparations",
-              imageUrl: "/images/ch/Chapter_15.png",
+              imageUrl: "/static/ch/Chapter_15.png",
               heading: "…eSourcing, Auction Strategies and Preparation Guidelines for a Successful e-negotiation - A proven methodology gaining adoption as a highly compliant, time-saving and efficient way to price discovery through online competition",
               introduction: JSON.stringify([
                 "eSourcing is the most efficient, transparent, and simpler way to negotiate; It has gained popularity, precedence, and momentum in the last decade.",
@@ -459,7 +442,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Execution Excellence, 6 -Sigma/ DMAIC",
-              imageUrl: "/images/ch/Chapter_16.png",
+              imageUrl: "/static/ch/Chapter_16.png",
               heading: "",
               introduction: JSON.stringify([
                 "You might be wondering how a chapter on Execution Excellence finds its place in a book that talks about Sourcing and Procurement. Well, the process/policy adherence requires the efforts in Sourcing and Procurement as well, and often, it is the deviation from the process that leads to unsatisfactory outcomes.",
@@ -480,7 +463,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Procurement Policy, Workflow and Authorization Matrix",
-              imageUrl: "/images/ch/Chapter_17.png",
+              imageUrl: "/static/ch/Chapter_17.png",
               heading: "",
               introduction: JSON.stringify([
                 "A well-drafted Procurement Policy with buy-in from all the key business heads is always recommended for the efficient functioning of every organization, in general, and a manufacturing organization, in particular.",
@@ -501,7 +484,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "KPIs and KRAs of Procurement Function",
-              imageUrl: "/images/ch/Chapter_18.png",
+              imageUrl: "/static/ch/Chapter_18.png",
               heading: "",
               introduction: JSON.stringify([
                 "Key Performance Indicators (KPIs) and Key Result Areas (KRAs) are commonly specified by progressive organizations right at the beginning of the annual appraisal cycle to give the individual adequate time to prove their performance and potential against the set goals.",
@@ -520,7 +503,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Category Research and Category Knowledge Management",
-              imageUrl: "/images/ch/Chapter_19.png",
+              imageUrl: "/static/ch/Chapter_19.png",
               heading: "...to Create a Strategy Review Document (SRD)",
               introduction: JSON.stringify([
                 "Category Research and Category Management go a long way to assist Procurement Managers in building a Purchase Strategy for the short and long term and achieve the best outcome within the boundaries of supply geography, supply market, supply constraints, and implementation challenges.",
@@ -541,7 +524,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Master Data Management – Item Master with Dictionary Overview, Vendor Master & Maintenance",
-              imageUrl: "/images/ch/Chapter_20.png",
+              imageUrl: "/static/ch/Chapter_20.png",
               heading: "",
               introduction: JSON.stringify([
                 "Item Master Creation and Maintenance assume prime importance for any Master Data Management function.",
@@ -567,7 +550,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Responsible Procurement : Procurement Ethics, Circular Economy, ESG, Sustainability Mandates, BRSR",
-              imageUrl: "/images/ch/Chapter_21.png",
+              imageUrl: "/static/ch/Chapter_21.png",
               heading: "",
               introduction: JSON.stringify([
                 "Procurement Ethics is a very hot and relevant topic that always needs a mention in any guide related to Procurement. The need assumes significance due to the commercial aspects involved, and clean Procurement is desired at all levels to maintain the repute of any customer-facing organization.",
@@ -590,7 +573,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Change Management",
-              imageUrl: "/images/ch/Chapter_22.png",
+              imageUrl: "/static/ch/Chapter_22.png",
               heading: "- Science of Managing Change As A Complex Transition Project Involving Human Behavior That Is Naturally Attuned to Resist",
               introduction: JSON.stringify([
                 "Change Management is the process to manage and control the people-side of change to reach the goal and reap the benefits of new ways of working introduced by a smaller group of leaders who want to achieve and positively influence the performance metrics.",
@@ -614,7 +597,7 @@ async function main() {
               price: 99,
               category: "CHAPTER",
               title: "Cognitive Buying and Digital Procurement, RPA",
-              imageUrl: "/images/ch/Chapter_23.png",
+              imageUrl: "/static/ch/Chapter_23.png",
               heading: "",
               introduction: JSON.stringify([
                 "Cognitive Buying is being adopted by most of the modern-thinking organizations as a smarter approach to procurement.",
