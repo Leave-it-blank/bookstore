@@ -50,19 +50,24 @@ export default async function handler(
           proccessOrder(Number(orderId));
         //fullfillOrder();
       case 'payment_intent.payment_failed':
- 
         if(orderId){
           cancelOrder(Number(orderId));
         }
         break;
       // ... handle other event types
+      case 'checkout.session.expired':
+        if(orderId){
+          cancelOrder(Number(orderId));
+        }
+        break;
+        
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
     return res.status(200).json( {received: true} );
   } catch (err: any) {
     console.log(`❌ Error message: ${err.message}`);
-    return res.status(400).json( {error: `Webhook Error: ${err.message}`});
+    return res.status(500).json( {error: `Webhook Error: ${err.message}`});
   } 
 };
 

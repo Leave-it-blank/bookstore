@@ -85,7 +85,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           }
     } catch (error) {
         console.error('Error:', error);
-       return res.status(500).end('Internal Server Error');
+        return res.status(500).json({  error: 'service down.' });
     }
 };
 

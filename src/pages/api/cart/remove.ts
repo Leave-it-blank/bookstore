@@ -21,7 +21,6 @@ export default async function handler(
         }
         const { id } = authenticate;
 
-        console.log(req.body);
         let cart = await prisma.cart.findUnique({
             where: {
                 userId: id,
@@ -38,7 +37,6 @@ export default async function handler(
         if(!cartItem) {
             return res.status(400).json({error: "Item not found."});
         }
-             
             cart = await prisma.cart.update({
                 where: {
                     userId: id,
@@ -62,15 +60,13 @@ export default async function handler(
                     id: req.body.id,
                 },
             });
-    
-
-             console.log(cartItem);
           return  res.status(200).json({message: "Item removed from cart."}  );
         }
-        catch (err : any) {
-            console.log(err);
-            return res.status(500).json( {error: "Unable to remove item from cart."});
-        }
+  
+    catch (error : any) {
+        console.log(error);
+        res.status(500).json({ error: 'service down' });
+      }
  
     
 };

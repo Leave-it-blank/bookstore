@@ -21,14 +21,39 @@ export default function mybook({ bookData }: any) {
     </>
 }
 
-export async function getServerSideProps({ params }: any) {
-    const { bookSlug } = params;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/books/${bookSlug}`);
-    const bookData = await res.json();
+async function fetchBookData(bookSlug: any) {
+    const apiUrl = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/books/${bookSlug}`;
+    const response = await fetch(apiUrl);
 
-    return {
-        props: {
-            bookData
-        }
+    if (!response.ok) {
+        throw new Error(`Failed to fetch book data for slug: ${bookSlug}`);
+    }
+
+    const bookData = await response.json();
+    return bookData;
+}
+
+
+export const getServerSideProps = async ({ params }: { params: { bookSlug: string } }) => {
+    const { bookSlug } = params;
+    try {
+        const bookData = await fetchBookData(bookSlug);
+
+        return {
+            props: {
+                bookData,
+            },
+        };
+    } catch (error) {
+        // Handle the error, e.g., log it or display a friendly error message.
+        console.error('Error fetching book data:', error);
+
+        // You can return a custom error page or redirect to a 404 page.
+        return {
+            redirect: {
+                destination: '/500', // You can create a custom 404 page
+                permanent: false,
+            },
+        };
     }
 }

@@ -88,11 +88,11 @@ export default async function handler(
     
 
            //  console.log(cartItem);
-          return  res.status(200).json({message: "Item added to cart."} );
+          return res.status(201).json({message: "Item added to cart."} );
         }
         catch (err : any) {
             console.log(err);
-            return res.status(500).json( {error: "Unable to add item to cart."});
+            return res.status(500).json( {error: "service down"});
         }
  
     

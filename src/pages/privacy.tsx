@@ -81,7 +81,7 @@ export default function privacy() {
                 For Query Handling, you may write as follows -
             </h2>
             <p className="my-4  text-sm sm:text-md md:text-lg text-justify"  >
-                Please write to ajay.garg@s2p-pace.com in case you face any difficulty in downloading from the link or face any error in payments.
+                Please write to <span className="font-bold">contact4bookqueries@gmail.com</span>  in case you face any difficulty in downloading from the link or face any error in payments.
                 You may also write your queries or clarifications in case you are not able to understand any topic in the chapters or having difficulty in understanding the add-ons given along with the chapters for practical application.
                 Finally, your suggestions are also welcome for my endeavor to continuously improve.
                 <br />

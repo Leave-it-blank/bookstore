@@ -9,7 +9,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
   }
 
   const { name, email, password, city } = req.body;
-  console.log(email, password, city);
+  //console.log(email, password, city);
 
   try {
     if (!name || !email || !password) {
@@ -27,7 +27,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     });
 
     if (existingUser) {
-      return res.status(400).json({ error: 'Email is already in use' });
+      return res.status(409).json({ error: 'Email is already in use' });
     }
 
     const hash  = await hashPassword(password)
@@ -42,7 +42,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     });
 
     if(!user){
-        return res.status(400).json({ error: 'User registration failed' });
+        return res.status(500).json({ error: 'User registration failed' });
     }
     const cart = await prisma.cart.findUnique({
       where: {
@@ -58,9 +58,9 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
           },
       });
   }
-
-    res.status(200).json({ message: 'User registered successfully'  });
+    res.status(201).json({ message: 'User registered successfully'  });
   } catch (error) {
-    res.status(400).json({ error: 'User registration failed',  errorLog: error  });
+    console.log(error);
+    res.status(500).json({ error: 'User registration failed',  errorLog: error  });
   }
 }

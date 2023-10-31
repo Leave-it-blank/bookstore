@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
                         <div className="justify-start text-xs sm:text-sm  items-start gap-5 inline-flex">
                             <div className="flex-col justify-start items-start gap-0.5 inline-flex">
                                 <Link href={"https://ajay.garg@s2p-pace.com"} className="text-gray-300  font-normal  leading-tight">ajay.garg@s2p-pace.com</Link>
-                                <Link href={"mailTo:akgarg71@gmail.com"} className="text-gray-300   font-normal   leading-tight">akgarg71@gmail.com</Link>
+                                <Link href={"mailTo:contact4bookqueries@gmail.com"} className="text-gray-300   font-normal   leading-tight">contact4bookqueries@gmail.com</Link>
                             </div>
                         </div>
 

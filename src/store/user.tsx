@@ -43,6 +43,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
             Authorization: `Bearer ${token}`,
           },
         });
+        // if (!data.ok) {
+        //   throw new Error('Backend services are down. Please try again later.');
+
+        // }
         const response = await data.json();
         console.log(response);
         if (response.status === "success") {
@@ -55,7 +59,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       }
     } catch (err) {
       console.log(err);
-
+      throw new Error('Something went wrong.');
     }
   };
 

@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/libs/prisma';
 import { authenticated } from '@/libs/auth';
+import { JwtPayload } from 'jsonwebtoken';
  
  
 export default async  function handler(
@@ -27,7 +28,7 @@ export default async  function handler(
         try {
                 const cart = await prisma.cart.findUnique({
                     where: {
-                        id: cartId
+                        userId: (auth as JwtPayload).id
                     },
                 })
                 if(!cart){
@@ -35,7 +36,7 @@ export default async  function handler(
                 }
                 await prisma.cart.update({
                     where: {
-                        id: cartId
+                        userId: (auth as JwtPayload).id
                     },
                     data: {
                         promo: null,
@@ -49,7 +50,7 @@ export default async  function handler(
                 });
         }
         catch (err : any) {
-            return res.status(500).json( {error: "unable to remove promo code."});
+            return res.status(500).json({  error: 'service down.' });
         }
  
     

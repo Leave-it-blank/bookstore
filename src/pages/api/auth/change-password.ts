@@ -20,7 +20,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     });
     const verify =  await comparePassword(password, user.password);
     if(!verify){
-        return res.status(400).json({ error: 'old password did not match.' });
+        return res.status(401).json({ error: 'old password did not match.' });
     }
     const hashnew  = await hashPassword(newpass);
     const usernew = await prisma.user.update({
@@ -30,13 +30,12 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
       },
     });
     if(!usernew){
-        return res.status(400).json({ error: 'Password change failed' });
+        return res.status(500).json({ error: 'Password change failed' });
     }
     res.status(200).json({ message: 'Password changed successfully' });
     
-
-    
   } catch (error) {
-    res.status(400).json({ error: 'User auth failed' });
+    console.log(error);
+    res.status(500).json({ error: 'service down' });
   }
 }

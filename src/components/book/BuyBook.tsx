@@ -114,25 +114,33 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
 
             body: JSON.stringify({ ...form, productId: Book.id }),
         }).then(async (res) => {
-            const data = await res.json();
-            if (res.ok) {
+            if (res.status === 200 || res.status == 201) {
                 toast.success("Successfully added to cart")
                 // router.push('/cart');
-
-            } else {
+            } else if (res.status == 500) {
+                toast.error("Backend service is down. Try again.")
+            } else if (res.status == 404) {
+                toast.error("Not found. Try again.")
+            } else if (res.status == 403) {
+                toast.error("Request failed. Forbidden.");
+            } else if (res.status == 400 || res.status == 401 || res.status == 402 || res.status == 409) {
+                const data = await res.json();
                 if (data.error) {
                     toast.error(data.error)
-                } else {
-                    toast.error("Something went wrong. Please try again")
                 }
-
+            } else if (res.status == 429) {
+                toast.error("Too many requests. Please try again later.")
+            } else if (res.status == 405 || res.status == 501) {
+                toast.error("Method not allowed.")
+            } else if (res.status == 451) {
+                toast.error("Unavailable For Legal Reasons.")
+            } else {
+                toast.error("Something went wrong. Please try again")
             }
         }).catch((err) => {
             console.log(err);
             toast.error("Something went wrong. Please try again")
         });
-
-
 
     }
 
@@ -154,18 +162,28 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
 
             body: JSON.stringify({ ...form, productId: Book.id }),
         }).then(async (res) => {
-            const data = await res.json();
-            if (res.ok) {
+            if (res.status === 200 || res.status == 201) {
                 toast.success("Added to cart")
                 router.push('/cart');
-
-            } else {
+            } else if (res.status == 500) {
+                toast.error("Backend service is down. Try again.")
+            } else if (res.status == 404) {
+                toast.error("Not found. Try again.")
+            } else if (res.status == 403) {
+                toast.error("Request failed. Forbidden.");
+            } else if (res.status == 400 || res.status == 401 || res.status == 402 || res.status == 409) {
+                const data = await res.json();
                 if (data.error) {
                     toast.error(data.error)
-                } else {
-                    toast.error("Something went wrong. Please try again")
                 }
-
+            } else if (res.status == 429) {
+                toast.error("Too many requests. Please try again later.")
+            } else if (res.status == 405 || res.status == 501) {
+                toast.error("Method not allowed.")
+            } else if (res.status == 451) {
+                toast.error("Unavailable For Legal Reasons.")
+            } else {
+                toast.error("Something went wrong. Please try again")
             }
         }).catch((err) => {
             console.log(err);
@@ -348,7 +366,7 @@ export const BuyBookPage = ({ Book, author }: { Book: BookProps, author: any }):
 
                             <button onClick={handlePreOrder} className=" flex  mt-15 md:mt-5 xl:mt-0 w-full md:w-fit h-20 items-center justify-center gap-[8px]  px-24 py-15 relative   bg-black rounded-[16px] overflow-hidden">
                                 <div className="relative w-fit md:px-32 [font-family:'Mulish-Medium',Helvetica] font-medium text-white  text-xl md:text-2xl">
-                                    Pre Order
+                                    Pre Order <small>*</small>
                                 </div>
                             </button>
                         </>

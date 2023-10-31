@@ -13,16 +13,20 @@ export default async function handler(
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method not allowed' })
     }
-   // console.log(author)
+  try{ // console.log(author)
    const author = await prisma.author.findUnique({
     where: {
        name: "Ajay Garg"
     },
    })
-  
-
     if (!author) {
         return res.status(404).json({ error: 'Books not found' });
     }
     res.status(200).json(author);
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'service down' });
+      }
 };

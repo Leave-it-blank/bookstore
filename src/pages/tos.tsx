@@ -28,13 +28,36 @@ export default function tos() {
                 All disputes are subject to Delhi jurisdiction only.
             </p>
             <br />
+            <h1 className="text-xl md:text-2xl   font-bold "> Pre-Order Courier Charges: </h1> <br />
+            <h3 className="text-lg md:text-xl   font-bold ">
+                An additional fee of INR 200 will be levied as courier charges on pre-orders of hardcopy versions of books.
+            </h3>
+            <br />
+            <h3 className="text-md md:text-lg   font-semibold ">   1. Payment:</h3>
+            <p className="my-4  text-sm sm:text-md md:text-lg text-justify">
+                The courier charges are in addition to the {"book's"} purchase price.
+
+                Payment of the courier charges must be made at the time of placing the pre-order.
+            </p>
+            <h3 className="text-md md:text-lg   font-semibold "> 2. Shipping and Delivery:</h3>
+            <p className="my-4  text-sm sm:text-md md:text-lg text-justify">
+                The courier charges cover the cost of shipping and handling to the specified delivery address.
+
+                Delivery times may vary depending on your location and other factors. We will make every effort to ensure timely delivery.
+            </p>
+            <h3 className="text-md md:text-lg   font-semibold "> 3. Refunds and Cancellations:</h3>
+            <p className="my-4  text-sm sm:text-md md:text-lg text-justify">
+                The courier charges are non-refundable.
+
+                Pre-orders of hardcopy books may be canceled in accordance with our standard cancellation policy. However, the courier charges are not refundable in case of cancellation.
+            </p>
 
             <br />
             <h2 className="text-xl md:text-2xl   font-bold ">
                 For Query Handling, you may write as follows -
             </h2>
             <p className="my-4  text-sm sm:text-md md:text-lg text-justify">
-                Please write to ajay.garg@s2p-pace.com in case you face any difficulty in downloading from the link or face any error in payments.
+                Please write to <span className="font-bold">contact4bookqueries@gmail.com</span>  in case you face any difficulty in downloading from the link or face any error in payments.
                 You may also write your queries or clarifications in case you are not able to understand any topic in the chapters or having difficulty in understanding the add-ons given along with the chapters for practical application.
                 Finally, your suggestions are also welcome for my endeavor to continuously improve.
                 <br />

@@ -86,7 +86,7 @@ async function completeOrder(orderId: number){
         }
         const currentTime = new Date();
         // Add 30 minutes to the current time
-        const futureTime = new Date(currentTime.getTime() + 20 * 60000); // 30 minutes = 30 * 60,000 milliseconds
+        const futureTime = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000);
         await prisma.OrderItem.update({
             where: {
                 id: item.id

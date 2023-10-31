@@ -10,7 +10,7 @@ export default async function handler(
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method not allowed' })
     }
-    const authenticate = await authenticated(req);
+    try{    const authenticate = await authenticated(req);
 
     if (!authenticate || typeof authenticate === 'string') {
         return res.status(401).json({ error: 'Unauthorized' });
@@ -35,9 +35,15 @@ export default async function handler(
                  
             },
         });
-        return res.status(200).json({ cartId: newcart.id , message: "Cart created" });
+        return res.status(201).json({ cartId: newcart.id , message: "Cart created" });
     }
 
     
     return res.status(200).json({ cartId: cart.id , message: "Cart already exists"});
+}
+
+catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'service down' });
+  }
 };

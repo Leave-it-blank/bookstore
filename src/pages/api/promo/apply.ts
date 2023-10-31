@@ -51,7 +51,7 @@ export default async  function handler(
                     return res.status(400).json({ error: 'Invalid request' })
                 }
                 if(cart.total < 500){
-                    return res.status(400).json({ error: 'Cart total needs to be more than 500.' })
+                    return res.status(400).json({ valid: false,  error: 'Cart total needs to be more than 500.' })
                 }
                 await prisma.cart.update({
                     where: {
@@ -70,7 +70,7 @@ export default async  function handler(
         }
         catch (err : any) {
             console.log(err);
-            return res.status(500).json( {error: "Invalid promo code"});
+            return res.status(500).json({ error: 'service down' });
         }
  
     

@@ -13,18 +13,31 @@ export const FormComponent = ({ closeModal, form, userDetails, setUserDetails }:
             body: JSON.stringify({ form, userDetails }),
         }).then(async (res) => {
             const data = await res.json();
-            if (res.ok) {
+            if (res.status === 200 || res.status == 201) {
                 console.log(data)
                 toast.success("Successfully Submited Request.");
 
                 // window.location.href = '/';
-            } else {
+            } else if (res.status == 500) {
+                toast.error("Backend service is down. Try again.")
+            } else if (res.status == 404) {
+                toast.error("Not found. Try again.")
+            } else if (res.status == 403) {
+                toast.error("Request failed. Forbidden.");
+            } else if (res.status == 400 || res.status == 401 || res.status == 402 || res.status == 409) {
+                const data = await res.json();
                 if (data.error) {
-                    toast.error(data.error)
-                } else {
-                    toast.error("Something went wrong. Please try again")
-                }
 
+                    toast.error(data.error)
+                }
+            } else if (res.status == 429) {
+                toast.error("Too many requests. Please try again later.")
+            } else if (res.status == 405 || res.status == 501) {
+                toast.error("Method not allowed.")
+            } else if (res.status == 451) {
+                toast.error("Unavailable For Legal Reasons.")
+            } else {
+                toast.error("Something went wrong. Please try again")
             }
         }).catch((err) => {
             console.log(err);

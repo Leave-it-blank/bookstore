@@ -44,7 +44,7 @@ export default async function handler(
  
     } catch (err) {
         console.log(err);
-        return res.status(500).json({ error: 'Failed to save the order' })
+        return res.status(500).json({  error: 'service down.' });
     }
  
 };

@@ -1,12 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
 body {
   background:  #FAFAFA;
 }
-
 @layer components {
   .all-\[unset\] {
     all: unset;

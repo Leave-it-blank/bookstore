@@ -6,7 +6,9 @@ import {createOrder} from '@/utils/backend/handleOrder';
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req :NextApiRequest , res : NextApiResponse) {
-  if (req.method === 'POST') {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' })
+}
     const { cart } = req.body;
     const auth  = await authenticated(req);
     if(!auth || (typeof auth === 'string')){
@@ -19,7 +21,6 @@ export default async function handler(req :NextApiRequest , res : NextApiRespons
     }
     
     try {
-
        const getCart = await prisma.cart.findUnique({
         where: {
           userId: auth.id
@@ -131,9 +132,6 @@ export default async function handler(req :NextApiRequest , res : NextApiRespons
     return res.status(500).json({  error: 'Session could not be generated' });
     
   }
-}  else {
-    res.setHeader('Allow', 'POST');
-    res.status(405).end('Method Not Allowed');
-}
-}
+}   
+ 
  

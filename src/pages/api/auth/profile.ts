@@ -28,8 +28,9 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
             });
         });
 
-    res.status(400).json({ token: "" , refreshToken: "" , message: 'Token Expired.'   });
+    res.status(403).json({ token: "" , refreshToken: "" , message: 'Token Expired.'   });
   } catch (error) {
-    res.status(400).json({ error: 'User registration failed' });
+    console.log(error);
+    res.status(500).json({ error: 'service down' });
   }
 }

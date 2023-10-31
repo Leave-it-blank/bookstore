@@ -54,10 +54,36 @@ export default function Home({ books, author }: any) {
 }
 
 
-export const getServerSideProps = (async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/books/getbooks`)
-  const books = await res.json()
-  const authorRes = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/author/getauthor`)
-  const author = await authorRes.json()
-  return { props: { books, author } }
-})  
+export const getServerSideProps = async () => {
+  try {
+    const books = await fetchBooks();
+    const author = await fetchAuthor();
+
+    return { props: { books, author } };
+  } catch (error) {
+    // Handle the error, e.g., log it or display a friendly error message.
+    console.error('Error fetching data:', error);
+    return {
+      redirect: {
+        destination: '/500', // You can create a custom 404 page
+        permanent: false,
+      },
+    };
+  }
+}
+
+async function fetchBooks() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/books/getbooks`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch books');
+  }
+  return await res.json();
+}
+
+async function fetchAuthor() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/author/getauthor`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch author data');
+  }
+  return await res.json();
+}

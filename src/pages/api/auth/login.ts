@@ -12,12 +12,12 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
   }
   const { email, password } = req.body;
   try {
-    console.log(email, password)
+   // console.log(email, password)
     if(email === "" || password === ""){
-      return res.status(400).json({ error: 'User login failed' });
+      return res.status(401).json({ error: 'User login failed' });
     }
     if(!validateEmail(email)){
-      return res.status(400).json({ error: 'Invalid Email' });
+      return res.status(402).json({ error: 'Invalid Email' });
     }
     const user = await prisma.user.findUnique({
       where: {
@@ -26,7 +26,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     });
      
     if(!user){
-      return res.status(400).json({ error: 'Credentials did not match.' });
+      return res.status(401).json({ error: 'Credentials did not match.' });
     }
 
     const verify = await comparePassword(password, user.password );
@@ -44,11 +44,12 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     }
 
     else {
-      res.status(400).json({ error: 'Credentials did not match.' });
+      res.status(401).json({ error: 'Credentials did not match.' });
     }
 
     
   } catch (error) {
-    res.status(400).json({ error: 'User login failed' });
+    console.log(error);
+    res.status(500).json({ error: 'service down' });
   }
 }

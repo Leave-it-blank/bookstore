@@ -91,7 +91,7 @@ export default function NavBar() {
 
                     <ul className="  font-bold text-xl">
                         <Link href={"/"}>
-                            <Image src="/images/logo_rm.png" width={100} height={100} alt={""} className="w-fit h-12 self-center object-contain rounded-full border-2 border-black " />
+                            <Image src="/static/logo_rm.png" width={100} height={100} alt={""} className="w-fit h-12 self-center object-contain rounded-full border-2 border-black " />
                         </Link>
                     </ul>
 
@@ -122,7 +122,7 @@ export default function NavBar() {
                                 <>
                                     <div className="flex flex-row justify-between items-center px-3">
                                         <Link href={"/"}>
-                                            <Image src="/images/logo_rm.png" width={100} height={100} alt={""} className="w-fit -mt-2 h-12 self-center object-contain rounded-full border-2 border-black " />
+                                            <Image src="/static/logo_rm.png" width={100} height={100} alt={""} className="w-fit -mt-2 h-12 self-center object-contain rounded-full border-2 border-black " />
                                         </Link>
                                         <Disclosure.Button className="flex     justify-between rounded-lg  bg-[#E0E4EF] px-4 py-2 text-left text-md font-medium items-center   ">
                                             {open ? <XMarkIcon

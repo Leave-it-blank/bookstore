@@ -41,12 +41,11 @@ const Checkout = () => {
                     })
                 if (res.ok) {
                     const { cart } = await res.json()
-
                     setCart(cart);
                     setCartLoading(false);
 
                 } else {
-                    toast.error("Something went wrong.")
+                    toast.error("Backend service is down. Try again.")
                 }
 
             } catch (err) {
@@ -70,10 +69,9 @@ const Checkout = () => {
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({ promo }),
         }).then(async (res) => {
-            const data = await res.json();
-            if (res.ok) {
+            if (res.status === 200 || res.status == 201) {
+                const data = await res.json();
                 if (data.valid) {
-
                     toast.success(data.message)
                     setPromoError("")
                     setReload(!reload)
@@ -83,14 +81,24 @@ const Checkout = () => {
                 }
 
 
-            } else {
+            } else if (res.status == 404 || res.status == 500) {
+                toast.error("Backend service is down. Try again.")
+            } else if (res.status == 403) {
+                toast.error("Request failed. Forbidden.");
+            } else if (res.status == 400 || res.status == 401 || res.status == 402 || res.status == 409) {
+                const data = await res.json();
                 if (data.error) {
-                    setPromoError(data.error)
                     toast.error(data.error)
-                } else {
-                    toast.error("Something went wrong. Please try again")
+                    setPromoError(data.error)
                 }
-
+            } else if (res.status == 429) {
+                toast.error("Too many requests. Please try again later.")
+            } else if (res.status == 405 || res.status == 501) {
+                toast.error("Method not allowed.")
+            } else if (res.status == 451) {
+                toast.error("Unavailable For Legal Reasons.")
+            } else {
+                toast.error("Something went wrong. Please try again")
             }
         }).catch((err) => {
             console.log(err);
@@ -103,8 +111,8 @@ const Checkout = () => {
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({ cartId: cart.id, token: token }),
         }).then(async (res) => {
-            const data = await res.json();
-            if (res.ok) {
+            if (res.status === 200 || res.status == 201) {
+                const data = await res.json();
                 if (data.valid) {
                     toast.success(data.message)
                     setReload(!reload)
@@ -114,14 +122,24 @@ const Checkout = () => {
                 }
 
 
-            } else {
+            } else if (res.status == 404 || res.status == 500) {
+                toast.error("Backend service is down. Try again.")
+            } else if (res.status == 403) {
+                toast.error("Request failed. Forbidden.");
+            } else if (res.status == 400 || res.status == 401 || res.status == 402 || res.status == 409) {
+                const data = await res.json();
                 if (data.error) {
-                    setPromoError(data.error)
                     toast.error(data.error)
-                } else {
-                    toast.error("Something went wrong. Please try again")
+                    setPromoError(data.error)
                 }
-
+            } else if (res.status == 429) {
+                toast.error("Too many requests. Please try again later.")
+            } else if (res.status == 405 || res.status == 501) {
+                toast.error("Method not allowed.")
+            } else if (res.status == 451) {
+                toast.error("Unavailable For Legal Reasons.")
+            } else {
+                toast.error("Something went wrong. Please try again")
             }
         }).catch((err) => {
             console.log(err);
@@ -145,7 +163,7 @@ const Checkout = () => {
                 body: JSON.stringify({ cart: cart, token: token }),
             }).then(async (res) => {
                 const checkoutSession = await res.json();
-                if (res.ok) {
+                if (res.status === 200 || res.status == 201) {
                     const result = await stripe.redirectToCheckout({
                         sessionId: checkoutSession.data.id,
                     });
@@ -153,10 +171,26 @@ const Checkout = () => {
                         setProccessLoading(false);
                         toast.error(result.error.message || "Error redirecting to checkout")
                     }
-                } else {
-                    setProccessLoading(false);
-                    toast.error("Something went wrong. Please try again")
+                } else if (res.status == 500) {
+                    toast.error("Backend service is down. Try again.")
+                } else if (res.status == 404) {
+                    toast.error("Not found. Try again.")
+                } else if (res.status == 403) {
+                    toast.error("Request failed. Forbidden.");
+                } else if (res.status == 400 || res.status == 401 || res.status == 402 || res.status == 409) {
+                    const data = await res.json();
+                    if (data.error) {
 
+                        toast.error(data.error)
+                    }
+                } else if (res.status == 429) {
+                    toast.error("Too many requests. Please try again later.")
+                } else if (res.status == 405 || res.status == 501) {
+                    toast.error("Method not allowed.")
+                } else if (res.status == 451) {
+                    toast.error("Unavailable For Legal Reasons.")
+                } else {
+                    toast.error("Something went wrong. Please try again")
                 }
             }).catch((err) => {
                 console.log(err);
@@ -191,7 +225,7 @@ const Checkout = () => {
         <>   <h1 className="text-2xl md:text-3xl  font-semibold mb-4"> Checkout Basket</h1>
 
             <div className='bg-red-100 text-red-500 p-5 md:p-6 rounded-md mb-3'>
-                Download link will only be available for 15 min after purchase. Please download the file as soon as possible.
+                Download link will only be available for 24 hr after purchase. Please download the file as soon as possible.
             </div>
 
             <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg flex justify-center flex-col  py-4">
