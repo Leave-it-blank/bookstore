@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -29,16 +29,16 @@ model Profile {
 model Chapter {
   id           Int         @id @unique @default(autoincrement())
   number       Float       @unique
-  title        String      @db.MediumText
+  title        String      @db.Text()
   category     CATEGORY    @default(CHAPTER)
   price        Float
-  imageUrl     String      @db.LongText
-  heading      String      @db.LongText
-  introduction String      @db.LongText
-  goalsTitle   String      @db.LongText
-  goals        String      @db.LongText
+  imageUrl     String      @db.Text()
+  heading      String      @db.Text()
+  introduction String      @db.Text()
+  goalsTitle   String      @db.Text()
+  goals        String      @db.Text()
   productId    Int
-  Product      Product     @relation(fields: [productId], references: [id])
+  Product      Product     @relation(fields: [productId], references: [id], map: "Chapter_ProductId_fkey")
   CartItems    CartItems[]
   OrderItem    OrderItem[]
   links        links[]
@@ -49,12 +49,12 @@ model Chapter {
 model Author {
   id         Int      @id @unique @default(autoincrement())
   name       String   @unique
-  jobTitle   String   @db.MediumText
-  degree     String   @db.MediumText
-  college    String   @db.MediumText
+  jobTitle   String   @db.Text()
+  degree     String   @db.Text()
+  college    String   @db.Text()
   city       String
-  about      String   @db.LongText
-  imageUrl   String   @db.LongText
+  about      String   @db.Text()
+  imageUrl   String   @db.Text()
   linkdInUrl String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -68,8 +68,8 @@ model Order {
   status      OrderStatus
   total       Float
   customerId  Int
-  pay_url     String?     @db.MediumText
-  customer    User        @relation(fields: [customerId], references: [id])
+  pay_url     String?     @db.Text()
+  customer    User        @relation(fields: [customerId], references: [id], map: "Order_customerId_User_fkey")
   items       OrderItem[]
 
   @@index([customerId], map: "Order_customerId_fkey")
@@ -84,9 +84,9 @@ model OrderItem {
   orderId    Int
   link       String?
   activedate DateTime @default(now())
-  order      Order    @relation(fields: [orderId], references: [id])
-  Product    Product? @relation(fields: [productId], references: [id])
-  Chapter    Chapter? @relation(fields: [chapterId], references: [id])
+  order      Order    @relation(fields: [orderId], references: [id], map: "OrderItem_orderId_relation")
+  Product    Product? @relation(fields: [productId], references: [id], map: "OrderItem_productId_fkey_unique")
+  Chapter    Chapter? @relation(fields: [chapterId], references: [id], map: "OrderItem_chapterId_fkey")
 
   @@index([orderId], map: "OrderItem_orderId_fkey")
   @@index([productId], map: "OrderItem_productId_fkey")
@@ -97,9 +97,9 @@ model Product {
   titleSlug     String           @unique
   title         String
   category      Product_category @default(BOOK)
-  thumbUrl      String           @db.LongText
+  thumbUrl      String           @db.Text()
   rating        Float
-  description   String?          @db.LongText
+  description   String?          @db.Text()
   priceDigital  Float
   priceHardCopy Float
   authorId      Int
@@ -205,6 +205,6 @@ model promo_codes {
   code        String   @unique
   discount    Float    @default(0)
   limit       Int      @default(10)
-  description String?  @db.MediumText
+  description String?  @db.Text()
   createdAt   DateTime @default(now())
 }
